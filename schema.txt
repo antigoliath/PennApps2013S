@@ -4,28 +4,20 @@ Project :
   description : "This is a description of the project"
 }
 
+
+# NOTE: attributes will be identified BY NAME
+
 Class :
 {
 	id : "12345890abcdef",
   project : "123456",
 	name : "MyClass",
 	description : "Does a lot of fun stuff...",
-	parent : "12345890abcdef",
-	interfaces : ["1234567890","235235ab125"],
+	parent : "Comparable",
+	interfaces : ["Object","Object"],
 	attributes : [ 
 		{ name : "id", scope : "private", type : "int", description : "The ID in the database" } 
 		],
-	methods : [
-		{
-			name : "addComment",
-			description : "Adds a comment to the class",
-			scope : "public",
-			ret : "int",
-			args : [
-				{ name : "comment", type : "string", description : "The comment to add}
-				]
-		}
-		]
 }
 
 Interface :
@@ -34,17 +26,19 @@ Interface :
   project : "123456",
 	name : "Commentable",
 	description : "An interface for making these be commentable!",
-	methods : [
-		{
-			name : "addComment",
-			description : "Adds a comment to the class",
-			scope : "public",
-			ret : "int",
-			args : [
-				{ name : "comment", type : "string", description : "The comment to add}
-				]
-		}
-		]
+  attributes : [ 
+		{ name : "id", scope : "private", type : "int", description : "The ID in the database" } 
+		],
+}
+
+Method: {
+  class: '123456',
+  description : "Adds a comment to the class",
+  scope : "public",
+  ret : "int",
+  args : [
+    { name : "comment", type : "string", description : "The comment to add }
+  ]
 }
 
 Project :

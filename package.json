@@ -12,7 +12,5 @@
     "socket.io": "*",
     "mongoose": "*",
     "connect-mongo": "*" 
-
-
   }
 }
