@@ -7,7 +7,27 @@
   <body>
 
     project
-    <form method="POST">
+    <form method="POST" action="/projects/new">
+      <input name="name" />
+      <input name="description" />
+      <input type="submit">
+    </form>
+
+    class
+    <form method="POST" action="/classes/new">
+      <input name="name" />
+      <input name="description" />
+      <input name="project" />
+      <input type="submit">
+    </form>
+    method 
+    <form method="POST" action= "/methods/new">
+      <input name="name" />
+      <input name="description" />
+      <input type="submit">
+    </form>
+    interface 
+    <form method="POST" action= "/interfaces/new">
       <input name="name" />
       <input name="description" />
       <input type="submit">
