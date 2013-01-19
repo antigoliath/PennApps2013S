@@ -11,7 +11,7 @@ exports.Project = mongoose.model('Project', Project);
 var Class = new mongoose.Schema({
   name: String,
   description: String,
-  project: Number,
+  project: ObjectId,
   parent: String,
   interfaces: [String],
   attributes: [
@@ -30,7 +30,7 @@ exports.Class = mongoose.model('Class', Class);
 var Interface = new mongoose.Schema({
   name: String,
   description: String,
-  project: Number,
+  project: ObjectId,
   attributes: [
     { 
       name: String,
@@ -48,6 +48,7 @@ var Method = new mongoose.Schema({
   name: String,
   description: String,
   scope: String,
+  class: ObjectId,
   ret: String,
   args: [
     {
