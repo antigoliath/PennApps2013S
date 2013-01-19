@@ -20,8 +20,8 @@ Class :
 			name : "addComment",
 			description : "Adds a comment to the class",
 			scope : "public",
-			return : "int",
-			arguments : [
+			ret : "int",
+			args : [
 				{ name : "comment", type : "string", description : "The comment to add}
 				]
 		}
@@ -39,8 +39,8 @@ Interface :
 			name : "addComment",
 			description : "Adds a comment to the class",
 			scope : "public",
-			return : "int",
-			arguments : [
+			ret : "int",
+			args : [
 				{ name : "comment", type : "string", description : "The comment to add}
 				]
 		}
