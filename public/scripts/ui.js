@@ -33,11 +33,12 @@ function resetAddAttribute() {
 				break;
 			case "2":
 				the_attribute.description = $("#attribute-textbox").val();
-				var modified_class = getClass($("#current-object-id").text());
+				var obj_type = $("#current-object-type").text();
+				var modified_class = getInterClass($("#current-object-id").text(),obj_type);
 				modified_class.attributes.push(the_attribute);
 				var data = {
 					action : "modify",
-					type : "class",
+					type : obj_type,
 					info : modified_class,
 					project_id : $("#current-project-id").text()
 				}
@@ -83,7 +84,7 @@ function resetAddArgument(the_method) {
 			case "2":
 				the_argument.description = the_method.find(".argument-textbox").val();
 				var modified_method = getMethod(the_method.find(".method-id").text());
-				modified_method.arguments.push(the_argument);
+				modified_method.args.push(the_argument);
 				var data = {
 					action : "modify",
 					type : "method",
@@ -156,34 +157,39 @@ function resetAddMethod() {
 function attributeListeners() {
 	$('.attribute .name span').unbind('click');
 	$('.attribute .name span').click(function() {
-		var _attribute = $(this).parent().parent();
+		var _attribute = $(this).parent().parent().parent();
 		var _name = _attribute.find('.name').text();
 		var _type = _attribute.find('.type').text();
 		var _desc = _attribute.find('.description').text().replace('"',"&quot;");
+		_attribute.find('.name').addClass("inputed");
+		_attribute.find('.type').addClass("inputed");
 		_attribute.find('.name').html("<input type='text' class='edit-attribute-name-"+_name+"' value='"+_name+"'/>");
 		_attribute.find('.type').html("<input type='text' class='edit-attribute-type-"+_name+"' value='"+_type+"'/>");
 		_attribute.find('.description').html('<input class="edit-attribute-desc-'+_name+'" value="'+_desc+'" />');
-		
+		_attribute.find(".name:first input").focus();
 		_attribute.find('input').keydown(function(event) {
 			if(event.keyCode == 13) {
 				var n_name =$('.edit-attribute-name-'+_name).val();
 				var n_type =$('.edit-attribute-type-'+_name).val();
 				var n_desc =$('.edit-attribute-desc-'+_name).val();
 				
+				_attribute.find('.name').removeClass("inputed");
+				_attribute.find('.type').removeClass("inputed");
 				_attribute.find('.name').html("<span>"+n_name+"</span>");
 				_attribute.find('.type').html(n_type);
 				_attribute.find('.description').html(n_desc);
-				var modified_class = getClass($("#current-object-id").text());
+				var obj_type = $("#current-object-type").text();
+				var modified_class = getInterClass($("#current-object-id").text(),obj_type);
 				for(var i=0;i<modified_class.attributes.length;i++) {
 					if(modified_class.attributes[i].name == _name) {
 						modified_class.attributes[i].name = n_name;
 						modified_class.attributes[i].type = n_type;
-						modified_class.attributes[i].description = n_description;
+						modified_class.attributes[i].description = n_desc;
 					}
 				}
 				var data = {
 					action : "modify",
-					type : "class",
+					type : obj_type,
 					info : modified_class,
 					project_id : $("#current-project-id").text()
 				}
@@ -211,16 +217,21 @@ function methodListeners() {
 			var _name = _method.find('.name:first').text();
 			var _type = _method.find('.return-type').text();
 			var _desc = _method.find('.description:first').text().replace('"',"&quot;");
+			_method.find('.name:first').addClass("inputed");
+			_method.find('.return-type').addClass("inputed");
 			_method.find('.name:first').html("<input type='text' class='edit-method-name-"+_name+"' value='"+_name+"'/>");
 			_method.find('.return-type').html("<input type='text' class='edit-method-type-"+_name+"' value='"+_type+"'/>");
 			_method.find('.description:first').html('<input class="edit-method-desc-'+_name+'" value="'+_desc+'" />');
-			
+			_method.find(".name:first input").focus();
 			_method.find('input').keydown(function(event) {
 				if(event.keyCode == 13) {
 					var n_name = $('.edit-method-name-'+_name).val();
 					var n_type = $('.edit-method-type-'+_name).val();
 					var n_desc = $('.edit-method-desc-'+_name).val();
-					
+									
+					_method.find('.name:first').removeClass("inputed");
+					_method.find('.return-type').removeClass("inputed");
+
 					_method.find('.name:first').html("<span>"+n_name+"</span>");
 					_method.find('.return-type').html(n_type);
 					_method.find('.description:first').html(n_desc);
@@ -248,4 +259,3 @@ function methodListeners() {
 		
 	});
 }
-
