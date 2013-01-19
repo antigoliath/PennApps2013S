@@ -1,6 +1,13 @@
+Project : 
+{
+  id : "123456",
+  description : "This is a description of the project"
+}
+
 Class :
 {
 	id : "12345890abcdef",
+  project : "123456",
 	name : "MyClass",
 	description : "Does a lot of fun stuff...",
 	parent : "12345890abcdef",
@@ -24,6 +31,7 @@ Class :
 Interface:
 {
 	id : "123452abc",
+  project : "123456",
 	name : "Commentable",
 	description : "An interface for making these be commentable!",
 	methods : [
