@@ -1,10 +1,3 @@
-function loadClassDetails(class_id) {
-	
-}
-function loadInterfaceDetails(interface_id){
-	
-}
-
 function resetAddAttribute() {
 	var the_attribute = {name : "", type : "", description : ""};
 	$('.attribute-prompt').html("Enter an attribute name <span>Press enter to continue</span>");

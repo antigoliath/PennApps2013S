@@ -19,6 +19,7 @@ var project = {
 			id :  "1",
 			scope : "public",
 			name : "like",
+			description : "testing",
 			class : "1",
 			ret : "void",
 			args : [
