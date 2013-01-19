@@ -1,0 +1,23 @@
+function addClass()
+function modifyClass()
+function deleteClass()
+function lockClass()
+function unlockClass()
+
+function addInterface()
+function modifyInterface()
+function deleteInterface()
+function lockInterface()
+function unlockInterface()
+
+function addAttribute()
+function modifyAttribute()
+function deleteAttribute()
+function lockAttribute()
+function unlockAttribute()
+
+function addMethod()
+function modifyMethod()
+function deleteMethod()
+function lockMethod()
+function unlockMethod()
