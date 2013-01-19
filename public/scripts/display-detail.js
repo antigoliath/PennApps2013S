@@ -1,27 +1,35 @@
-function loadClass(class_id) {
+function loadClassDetail(class_id) {
 	for(var i in project.classes) {
 		if(project.classes[i].id == class_id) {
 			var the_class = project.classes[i];
 			$("#current-object-type").text("class");
 			$("#current-object-id").text(the_class.id);
-			loadObject(the_class);
+			loadObjectDetail(the_class);
 		}
 	}
 }
-function loadInterface(interface_id) {
+function loadInterfaceDetail(interface_id) {
 	for(var i in project.interfaces) {
 		if(project.interfaces[i].id == interface_id) {
 			var the_interface = project.interfaces[i];
 			$("#current-object-type").text("interface");
 			$("#current-object-id").text(the_interface.id);
-			loadObject(the_interface);
+			loadObjectDetail(the_interface);
 		}
 	}
 	
 }
 
-function loadObject(the_obj) {
-			var edit_obj = $(".edit-object");
+function loadObjectDetail(the_obj) {
+		loadObjInfoDetail(the_obj);
+		loadMethodsDetail(the_obj);
+		resetAddAttribute();  
+		resetAddMethod();
+	
+}
+
+function loadObjInfoDetail(the_obj) {
+			var edit_obj = $(".edit-object");	
 			edit_obj.attr("id","edit-object-"+the_obj.id);
 			edit_obj.find(".info .name").text(the_obj.name);
 			edit_obj.find(".info .description").text(the_obj.description);
@@ -40,7 +48,12 @@ function loadObject(the_obj) {
 				'<div class="description">'+the_attr.description+'</div>'+
 				'</div>');
 			}
-			
+	
+		attributeListeners();
+}
+function loadMethodsDetail(the_obj) { 
+			var edit_obj = $(".edit-object");
+	
 			var meths = edit_obj.find(".methods");
 			meths.html("<h3>Methods</h3>");
 			for(var j in the_obj.methods) {
@@ -78,32 +91,11 @@ function loadObject(the_obj) {
 								'</div>'+
 				'</div>');
 			}
-			
-			
-		attributeListeners();  
+	 
 		methodListeners();  
-		resetAddAttribute();  
-		resetAddMethod();
-	
 }
-function modifyClass(class_obj){
-	
-}
-function deleteClass(class_id){
-	
-}
-function modifyInterface(interface_obj){
-	
-}
-function deleteInterface(interface_id){
-	
-}
-function addMethod(method_obj) {
-	
-}
-function modifyMethod(method_obj) {
-	
-}
-function deleteMethod() {
+
+
+function modifyClassDetail(class_obj){
 	
 }

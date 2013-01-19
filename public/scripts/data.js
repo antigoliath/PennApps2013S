@@ -20,7 +20,8 @@ var project = {
 			scope : "public",
 			name : "like",
 			description : "testing",
-			class : "1",
+			parent : "1",
+			parent_type : "class",
 			ret : "void",
 			args : [
 			{name : "user", type : "User", description : "The user liking it"},
@@ -45,7 +46,8 @@ var project = {
 			id :  "1",
 			scope : "public",
 			name : "addComment",
-			class : "1",
+			parent : "1",
+			parent_type : "interface",
 			ret : "boolean",
 			args : [
 			{name : "comment", type : "string", description : "The comment to add"},
@@ -74,12 +76,28 @@ function getInterClass(class_id,type) {
 	}
 }
 
-function getMethod(method_id) {
-	for(var i=0;i<project.classes.length;i++) {
-		var methods = project.classes[i].methods;
-		for(var j=0;j<methods.length;j++) {
-			if(methods[j].id == method_id) {
-				return methods[j];
+function getMethod(method_id,parent_id,parent_type) {
+	if(parent_type == "class") {
+		for(var i=0;i<project.classes.length;i++) {
+			if(project.classes[i].id == parent_id) {
+				var methods = project.classes[i].methods;
+				for(var j=0;j<methods.length;j++) {
+					if(methods[j].id == method_id) {
+						return methods[j];
+					}
+				}
+			}
+		}
+	}
+	else if(parent_type == "interface") {
+		for(var i=0;i<project.interfaces.length;i++) {
+			if(project.interfaces[i].id == parent_id) {
+				var methods = project.interfaces[i].methods;
+				for(var j=0;j<methods.length;j++) {
+					if(methods[j].id == method_id) {
+						return methods[j];
+					}
+				}
 			}
 		}
 	}
