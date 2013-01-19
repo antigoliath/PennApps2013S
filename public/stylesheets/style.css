@@ -14,3 +14,7 @@ a {
 .form-state {
 	display: none;
 }
+
+.add-argument {
+	display: none;
+}
