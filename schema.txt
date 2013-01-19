@@ -1,0 +1,40 @@
+Class :
+{
+	id : "12345890abcdef",
+	name : "MyClass",
+	description : "Does a lot of fun stuff...",
+	parent : "12345890abcdef",
+	interfaces : ["1234567890","235235ab125"],
+	attributes : [ 
+		{ name : "id", scope : "private", type : "int", description : "The ID in the database" } 
+		],
+	methods : [
+		{
+			name : "addComment",
+			description : "Adds a comment to the class",
+			scope : "public",
+			return : "int",
+			arguments : [
+				{ name : "comment", type : "string", description : "The comment to add}
+				]
+		}
+		]
+}
+
+Interface:
+{
+	id : "123452abc",
+	name : "Commentable",
+	description : "An interface for making these be commentable!",
+	methods : [
+		{
+			name : "addComment",
+			description : "Adds a comment to the class",
+			scope : "public",
+			return : "int",
+			arguments : [
+				{ name : "comment", type : "string", description : "The comment to add}
+				]
+		}
+		]
+}
