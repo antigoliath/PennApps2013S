@@ -61,7 +61,10 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/project', project.view);
 app.get('/users', user.list);
-app.get('/projects.json', projects.json);
+app.get('/projects.json', projects.project_json);
+app.get('/classes.json', projects.class_json);
+app.get('/methods.json', projects.method_json);
+app.get('/interfaces.json', projects.interface_json);
 app.get('/projects/new', projects.new_project);
 app.post('/projects/new', projects.create_project);
 app.post('/classes/new', projects.create_class);
