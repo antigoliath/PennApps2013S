@@ -76,7 +76,11 @@ function resetAddArgument(the_method) {
 				break;
 			case "2":
 				the_argument.description = the_method.find(".argument-textbox").val();
-				var modified_method = getMethod(the_method.find(".method-id").text());
+				var modified_method = getMethod(
+				the_method.find(".method-id").text(),
+				$("#current-object-id").text(),
+				$("#current-object-type").text()
+				);
 				modified_method.args.push(the_argument);
 				var data = {
 					action : "modify",
@@ -166,11 +170,11 @@ function attributeListeners() {
 				var n_type =$('.edit-attribute-type-'+_name).val();
 				var n_desc =$('.edit-attribute-desc-'+_name).val();
 				
-				_attribute.find('.name').removeClass("inputed");
-				_attribute.find('.type').removeClass("inputed");
-				_attribute.find('.name').html("<span>"+n_name+"</span>");
-				_attribute.find('.type').html(n_type);
-				_attribute.find('.description').html(n_desc);
+				//_attribute.find('.name').removeClass("inputed");
+				//_attribute.find('.type').removeClass("inputed");
+				//_attribute.find('.name').html("<span>"+n_name+"</span>");
+				//_attribute.find('.type').html(n_type);
+				//_attribute.find('.description').html(n_desc);
 				var obj_type = $("#current-object-type").text();
 				var modified_class = getInterClass($("#current-object-id").text(),obj_type);
 				for(var i=0;i<modified_class.attributes.length;i++) {
@@ -225,12 +229,16 @@ function methodListeners() {
 					_method.find('.name:first').removeClass("inputed");
 					_method.find('.return-type').removeClass("inputed");
 
-					_method.find('.name:first').html("<span>"+n_name+"</span>");
-					_method.find('.return-type').html(n_type);
-					_method.find('.description:first').html(n_desc);
+					//_method.find('.name:first').html("<span>"+n_name+"</span>");
+					//_method.find('.return-type').html(n_type);
+					//_method.find('.description:first').html(n_desc);
 					
 					
-					var modified_method = getMethod(_method.find(".method-id").text());
+					var modified_method = getMethod(
+					_method.find(".method-id").text(),
+					$("#current-object-id").text(),
+					$("#current-object-type").text()
+					);
 					modified_method.name = n_name;
 					modified_method.ret = n_type;
 					modified_method.description = n_desc;
