@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
+  , project = require('./routes/project')
   , path = require('path');
 
 var app = express();
@@ -30,6 +31,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/project', project.view);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
