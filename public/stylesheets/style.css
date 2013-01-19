@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+#detail-hidden-info {
+	display: none;
+}
+
+.form-state {
+	display: none;
+}

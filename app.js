@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , projects = require('./routes/projects')
   , http = require('http')
+  , project = require('./routes/project')
   , path = require('path')
   , mongoose = require("mongoose")
   , MongoStore = require('connect-mongo')(express);
@@ -58,6 +59,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/project', project.view);
 app.get('/users', user.list);
 app.get('/projects', projects.list);
 app.get('/projects/new', projects.new_project);

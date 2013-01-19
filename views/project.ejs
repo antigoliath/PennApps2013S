@@ -4,10 +4,86 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="public/scripts/ui.js"></script>
+    <script src="scripts/ui.js"></script>
   </head>
   <body>
+	  <script type='text/javascript'>
+	  $(document).ready(function() {
+		attributeListeners();  
+		resetAddAttribute();
+	  });
+	  </script>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <div id="project">
+		<div class="detail-panel">
+			<div id="detail-hidden-info">
+				<div id="current-object-id"></div>
+				<div id="current-object-type"></div>
+			</div>
+			<div id="edit-object">
+				<div class="info">
+					<div class="name">Name</div>
+					<div class="description">Put a description here...</div>
+				</div>
+				<div class="attributes">
+					<div class="attribute">
+						<div class="scope">private</div>
+						<div class="name"><span>id</span></div>
+						<div class="type">int</div>
+						<div class="description">It's a frickin id</div>	
+						<div id="delete-attribute-name-" class="delete">Delete</div>
+					</div>
+				</div>
+				<div class="methods">
+					<div class="method">
+						<div class="scope">public</div>
+						<div class="name">MyDangMethod</div>
+						<div class="return-type">void</div>
+						<div class="arguments">
+							<div class="argument">
+								<div class="name">arg1</div>
+								<div class="type">String</div>
+								<div class="description">The first argument</div>
+							</div>
+							<div class="toggle-add-argument">Add Argument</div>
+							<div class="add-argument">
+								<div class="argument-prompt"></div>
+								<div class="argument-preview"></div>
+								<div class="argument-form">
+									<input class="argument-textbox" type="text" />
+								</div>
+							</div>
+						</div>
+						<div class="description">It's a cool little method I wrote.</div>
+						<div id="delete-method-id-" class="delete">Delete</div>
+					</div>
+					<! -- End Method -- !>
+				</div>
+			</div>
+			<div id="add-attribute">
+				<div class="attribute-prompt">Enter an attribute name to get started.</div>
+				<div class="attribute-preview"></div>
+				<div class="attribute-form">
+					<div class="form-state"></div>
+					<input id="attribute-textbox" type="text" />
+				</div>
+			</div>
+			<div id="add-method">
+				<div class="method-prompt">Enter a method name to get started.</div>
+				<div class="method-preview"></div>
+				<div class="method-form">
+					<div class="form-state"></div>
+					<input id="method-textbox" type="text" />
+				</div>
+			</div>
+		</div>
+		<div class="visualizer-panel">
+			<div class="code-view">
+				<div class="the-code"></div>
+			</div>
+			<div class="hierarchical-view"></div>
+		</div>
+    </div>
   </body>
 </html>
