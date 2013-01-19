@@ -7,6 +7,12 @@
   },
   "dependencies": {
     "express": "3.0.6",
-    "ejs": "*"
+    "ejs": "*",
+    "underscore": "*",
+    "socket.io": "*",
+    "mongoose": "*",
+    "connect-mongo": "*" 
+
+
   }
 }
