@@ -113,7 +113,7 @@ function resetAddMethod() {
 				
 		switch($("#add-method .form-state").text()) {
 			case "0":
-				$('.method-prompt').html("Enter	 the method's return type <span>Press enter to continue, esc to cancel</span>");
+				$('.method-prompt').html("Enter the method's return type <span>Press enter to continue, esc to cancel</span>");
 				the_method.name = $("#method-textbox").val();
 				$('.method-preview').append(the_method.name);
 				$("#add-method .form-state").text("1");
@@ -153,6 +153,27 @@ function resetAddMethod() {
 }
 
 function attributeListeners() {
+		$('.attribute .delete').unbind('click');
+		$('.attribute .delete').click(function() {
+					var modified_obj = getInterClass(
+					$('#current-object-id').text(),
+					$('#current-object-type').text()
+					);
+					for(var i in modified_obj.attributes) {
+						if(modified_obj.attributes[i].name == $(this).parent().find('.name').text()) {
+							modified_obj.attributes.splice(i,1);
+						}
+					}
+					var data = {
+						action : "modify",
+						type : "class",
+						info : modified_obj,
+						project_id : $("#current-project-id").text()
+					}
+					console.log(data);
+					saveAction(data);
+		});
+	
 	$('.attribute .name span').unbind('click');
 	$('.attribute .name span').click(function() {
 		var _attribute = $(this).parent().parent().parent();
