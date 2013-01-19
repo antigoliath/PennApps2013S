@@ -1,6 +1,7 @@
 Project : 
 {
   id : "123456",
+  name : 'name of proj',
   description : "This is a description of the project"
 }
 
@@ -32,20 +33,14 @@ Interface :
 }
 
 Method: {
-  class: '123456',
+  name: 'name of method'
   description : "Adds a comment to the class",
   scope : "public",
+  parent: '123456',
+  parent-type: 'interface'
   ret : "int",
   args : [
     { name : "comment", type : "string", description : "The comment to add }
   ]
 }
 
-Project :
-{
-	id : "1245abc",
-	name : "My Project",
-	classes : ["1241523523ab","2352af"],
-	interfaces : ["12415235","2352125"],
-	settings : {}
-}
