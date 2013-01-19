@@ -61,9 +61,12 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/project', project.view);
 app.get('/users', user.list);
-app.get('/projects', projects.list);
+app.get('/projects.json', projects.json);
 app.get('/projects/new', projects.new_project);
-app.post('/projects/new', projects.create);
+app.post('/projects/new', projects.create_project);
+app.post('/classes/new', projects.create_class);
+app.post('/methods/new', projects.create_method);
+app.post('/interfaces/new', projects.create_interface);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

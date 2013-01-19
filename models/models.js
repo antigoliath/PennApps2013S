@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // contains classes, interfaces
 var Project = new mongoose.Schema({
@@ -9,11 +10,11 @@ var Project = new mongoose.Schema({
 exports.Project = mongoose.model('Project', Project);
 
 var Class = new mongoose.Schema({
-  id: Number,
   name: String,
   description: String,
-  parent: Number,
-  interfaces: [Number],
+  project: ObjectId,
+  parent: String,
+  interfaces: [String],
   attributes: [
     { 
       name: String,
@@ -22,29 +23,15 @@ var Class = new mongoose.Schema({
       description: String
     }
   
-  ],
-  methods: [
-    {
-      name: String,
-      description: String,
-      scope: String,
-      ret: String,
-      args: [
-        {
-          name: String,
-          type: String,
-          description: String
-        }
-      ]
-    }
   ]
 });
+
 exports.Class = mongoose.model('Class', Class);
 
 var Interface = new mongoose.Schema({
-  id: Number,
   name: String,
   description: String,
+  project: ObjectId,
   attributes: [
     { 
       name: String,
@@ -52,22 +39,25 @@ var Interface = new mongoose.Schema({
       type: String,
       description: String
     }
-  ],
-  methods: [
+  ]
+
+});
+
+exports.Interface = mongoose.model('Interface', Interface);
+
+var Method = new mongoose.Schema({
+  name: String,
+  description: String,
+  scope: String,
+  class: ObjectId,
+  ret: String,
+  args: [
     {
       name: String,
-      description: String,
-      scope: String,
-      ret: String,
-      args: [
-        {
-          name: String,
-          type: String,
-          description: String
-        }
-      ]
+      type: String,
+      description: String
     }
   ]
 });
 
-exports.Interface = mongoose.model('Interface', Interface);
+exports.Method = mongoose.model('Method', Method);
