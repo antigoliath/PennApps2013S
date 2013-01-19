@@ -10,7 +10,9 @@
 	  <script type='text/javascript'>
 	  $(document).ready(function() {
 		attributeListeners();  
-		resetAddAttribute();
+		methodListeners();  
+		resetAddAttribute();  
+		resetAddMethod();
 	  });
 	  </script>
     <h1><%= title %></h1>
@@ -18,6 +20,7 @@
     <div id="project">
 		<div class="detail-panel">
 			<div id="detail-hidden-info">
+				<div id="current-project-id"></div>
 				<div id="current-object-id"></div>
 				<div id="current-object-type"></div>
 			</div>
@@ -38,8 +41,9 @@
 				<div class="methods">
 					<div class="method">
 						<div class="scope">public</div>
-						<div class="name">MyDangMethod</div>
+						<div class="name"><span>MyDangMethod</span></div>
 						<div class="return-type">void</div>
+						<div class="description">It's a cool little method I wrote.</div>
 						<div class="arguments">
 							<div class="argument">
 								<div class="name">arg1</div>
@@ -48,6 +52,8 @@
 							</div>
 							<div class="toggle-add-argument">Add Argument</div>
 							<div class="add-argument">
+								<div class="method-id"></div>
+								<div class="form-state"></div>
 								<div class="argument-prompt"></div>
 								<div class="argument-preview"></div>
 								<div class="argument-form">
@@ -55,7 +61,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="description">It's a cool little method I wrote.</div>
 						<div id="delete-method-id-" class="delete">Delete</div>
 					</div>
 					<! -- End Method -- !>
