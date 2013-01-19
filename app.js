@@ -70,7 +70,7 @@ app.post('/projects/new', projects.create_project);
 app.post('/classes/new', projects.create_class);
 app.post('/methods/new', projects.create_method);
 app.post('/interfaces/new', projects.create_interface);
-app.post('/projects/save', projects.save);
+app.post('/save', projects.save);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

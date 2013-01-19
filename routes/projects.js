@@ -2,6 +2,7 @@
 
 var models = require('../models/models.js');
 var mongoose = require('mongoose');
+var _ = require('underscore');
 var ObjectId = mongoose.Types.ObjectId;
 
 function show_json(type, res){
@@ -59,6 +60,7 @@ exports.create_method = function(req,res) {
   create_helper('method', req.body);
 };
 exports.save = function(req,res) {
+  
 
   // var example = {
   //   action : "modify",
@@ -85,8 +87,9 @@ exports.save = function(req,res) {
 };
 function create_helper(type, info){
   var new_obj;
+  var hex_string = info.project || info.parent;
   // create from hexstring
-  info.project = ObjectId.fromString(info.project);
+  if(hex_string) hex_string = ObjectId.fromString(hex_string);
   switch(type)
   {
     case 'project': new_obj = new models.Project(info);
@@ -114,7 +117,10 @@ function change_helper(type, info, change_type){
   var mod_obj;
   var model; 
   // create from hexstring
-  info.project = ObjectId.fromString(info.project);
+  var hex_string = info.project || info.parent;
+  // create from hexstring
+  if(hex_string) hex_string = ObjectId.fromString(hex_string);
+
   switch(type)
   {
     case 'project': model = models.Project;
@@ -127,35 +133,30 @@ function change_helper(type, info, change_type){
                     break;
   }
 
-  model.findById(info.id).exec(
-    function (err, results) {
-      mod_obj = result;
-      if(change_type === 'modify') {
-        _.each(info, function(attr){
-          mod_obj.attr = attr;  
-        });
-        mod_obj.save(function(err){
+
+  if(change_type === 'modify') {
+    model.findByIdAndUpdate(info.id, info, {}, function(err){
           if(err) {
             console.log('ERROR: modifying ' + type + ' failed');
             console.log(err);
             return;
           } 
           else {
+            console.log(mod_obj);
             console.log('modifying' + type);
           }
         });
-      } else if(change_type === 'delete') {
-        mod_obj.remove(function(err, product){
-          if(err) {
-            console.log('ERROR: removing ' + type + 'failed.');
-            console.log(err);
-          }
-          else {
-            console.log('deleting' + type);
-          }
-        });
+  }
+  else if(change_type === 'delete') {
+    model.findByIdAndRemove(info.id, {}, function(err, product){
+      if(err) {
+        console.log('ERROR: removing ' + type + 'failed.');
+        console.log(err);
       }
-    } 
-  );
+      else {
+        console.log('deleting' + type);
+      }
+    });
+  }
 }
 
