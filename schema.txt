@@ -28,7 +28,7 @@ Class :
 		]
 }
 
-Interface:
+Interface :
 {
 	id : "123452abc",
   project : "123456",
@@ -45,4 +45,13 @@ Interface:
 				]
 		}
 		]
+}
+
+Project :
+{
+	id : "1245abc",
+	name : "My Project",
+	classes : ["1241523523ab","2352af"],
+	interfaces : ["12415235","2352125"],
+	settings : {}
 }
