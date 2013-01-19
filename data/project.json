@@ -1,4 +1,4 @@
-var project = {
+{
 	id : "1",
 	name : "My Project",
 	description : "It's a frickin awesome project",
@@ -19,7 +19,6 @@ var project = {
 			id :  "1",
 			scope : "public",
 			name : "like",
-			description : "testing",
 			class : "1",
 			ret : "void",
 			args : [
@@ -55,32 +54,4 @@ var project = {
 		]
 	}
 	]
-};
-
-function getInterClass(class_id,type) {
-	if(type == "class") {		
-		for(var i=0;i<project.classes.length;i++) {
-			if(project.classes[i].id == class_id) {
-				return project.classes[i];
-			}
-		}
-	}
-	else if(type == "interface") {
-		for(var i=0;i<project.interfaces.length;i++) {
-			if(project.interfaces[i].id == class_id) {
-				return project.interfaces[i];
-			}
-		}
-	}
-}
-
-function getMethod(method_id) {
-	for(var i=0;i<project.classes.length;i++) {
-		var methods = project.classes[i].methods;
-		for(var j=0;j<methods.length;j++) {
-			if(methods[j].id == method_id) {
-				return methods[j];
-			}
-		}
-	}
 }
