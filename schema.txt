@@ -34,6 +34,9 @@ Interface :
   project : "123456",
 	name : "Commentable",
 	description : "An interface for making these be commentable!",
+  attributes : [ 
+		{ name : "id", scope : "private", type : "int", description : "The ID in the database" } 
+		],
 	methods : [
 		{
 			name : "addComment",
@@ -41,7 +44,7 @@ Interface :
 			scope : "public",
 			ret : "int",
 			args : [
-				{ name : "comment", type : "string", description : "The comment to add}
+				{ name : "comment", type : "string", description : "The comment to add }
 				]
 		}
 		]
