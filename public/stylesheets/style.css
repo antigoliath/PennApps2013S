@@ -1,20 +1,18 @@
+html {
+	height: 100%;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background: #efefef;
+	padding: 0px;
+	margin: 0px;
+	height: 100%;	
+}
+
+.project {
+	height: 100%;
 }
 
 a {
   color: #00B7FF;
-}
-
-#detail-hidden-info {
-	display: none;
-}
-
-.form-state {
-	display: none;
-}
-
-.add-argument {
-	display: none;
 }

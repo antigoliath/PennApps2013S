@@ -1,0 +1,135 @@
+.detail-panel {
+	background: #fff;
+	
+	float: left;
+	
+	width: 26%;
+	height: 100%;
+	padding: 0px 2%;
+}
+
+#detail-hidden-info, .form-state, .add-argument, .method-id {
+	display: none;
+}
+
+.edit-object {
+	margin-top : 20px;
+}
+
+/*
+ * Generic detail panel styles
+ * 
+ * */
+.edit-object h3 {
+	margin: 5px 0px;
+}
+ 
+.edit-object .description {
+	font-size: 90%;
+	color: #999;
+	clear: both;
+}
+
+.edit-object .vital-info {
+	height: 20px;
+	width: 100%;
+	background:#efefef;
+	overflow: hidden;
+}
+
+.edit-object .vital-info > div {
+	float: left;
+	padding-right: 5px;
+}
+
+.edit-object .vital-info .name span {
+	cursor: pointer;
+}
+
+.edit-object .vital-info .inputed {
+	width: 25%;
+}
+
+.edit-object .vital-info input {
+	width: 100%;
+	height: 18px;
+}
+
+.edit-object .description input {
+	width:100%;
+	height: 20px;
+	margin-top: 5px;
+}
+
+.edit-object .vital-info .scope {
+	padding-top: 2px;
+	font-size: 80%;
+	color: #99f;
+}
+
+.edit-object .vital-info .name {
+	font-weight: bold;
+}
+
+.edit-object .vital-info .delete {
+	padding-top: 3px;
+	font-size: 80%;
+	color: #f99;
+}
+
+.edit-object .prompt span {
+	font-size: 80%;
+	color: #999;
+}
+
+/*
+ * Info styling
+ * 
+ * */
+.edit-object .info .name {
+	font-size: 150%;
+}
+
+
+/*
+ * Attribute styling
+ * 
+ * */
+
+.edit-object .attributes {
+	padding: 10px 0px 10px 20px;
+}
+
+.edit-object .attributes .attribute {
+	width: 100%;
+	padding-bottom: 5px;
+}
+
+
+/*
+ * Method styling
+ * 
+ * */
+
+
+.edit-object .methods {
+	padding: 10px 0px 10px 20px;
+}
+
+.edit-object .methods .method {
+	width: 100%;
+	padding-bottom: 5px;
+}
+
+/* 
+ * Argument styling
+ * 
+ */
+.edit-object .method .arguments {
+	padding: 5px 0px 5px 10px;
+}
+
+.edit-object .method .arguments .description {
+	clear: none;
+	padding-top: 3px;
+}
