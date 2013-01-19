@@ -113,7 +113,7 @@ function resetAddMethod() {
 				
 		switch($("#add-method .form-state").text()) {
 			case "0":
-				$('.method-prompt').html("Enter the method's return type <span>Press enter to continue, esc to cancel</span>");
+				$('.method-prompt').html("Enter	 the method's return type <span>Press enter to continue, esc to cancel</span>");
 				the_method.name = $("#method-textbox").val();
 				$('.method-preview').append(the_method.name);
 				$("#add-method .form-state").text("1");
@@ -129,7 +129,8 @@ function resetAddMethod() {
 			case "2":
 				the_method.description = $("#method-textbox").val();
 				var modified_method = the_method;
-				modified_method.class = $("#current-object-id").text();
+				modified_method.parent = $("#current-object-id").text();
+				modified_method.parent_type = $("#current-object-type").text();
 				modified_method.scope = "public";
 				modified_method.args = [];
 				var data = {
@@ -192,7 +193,6 @@ function attributeListeners() {
 				}
 				console.log(data);
 				saveAction(data);
-				attributeListeners();
 			}
 		});
 		
@@ -250,11 +250,25 @@ function methodListeners() {
 					}
 					console.log(data);
 					saveAction(data);
-					
-					methodListeners();
 				}
 			});
 			
+		});
+		
+		the_method.find(".delete").click(function() {
+					var modified_method = getMethod(
+					the_method.find(".method-id").text(),
+					$("#current-object-id").text(),
+					$("#current-object-type").text()
+					);
+					var data = {
+						action : "delete",
+						type : "method",
+						info : modified_method,
+						project_id : $("#current-project-id").text()
+					}
+					console.log(data);
+					saveAction(data);
 		});
 		resetAddArgument(the_method);
 		

@@ -63,7 +63,7 @@ function deleteInterface(info_obj) {
 function addMethod(info_obj) {
 	//Update the project object
 	var the_obj = null;
-	if(info_obj.parent_type == "class") {
+	if(info_obj.parent_type != "interface") {
 		for(var i in project.classes) {
 			var the_class = project.classes[i];
 			if(the_class.id == info_obj.parent) {
@@ -111,7 +111,16 @@ function modifyMethod(info_obj) {
 		for(var i in project.interfaces) {
 			var the_interface = project.interfaces[i];
 			if(the_interface.id == info_obj.parent) {
-				the_interface.methods.push(info_obj);
+				for(var j in the_interface.methods) {
+					var the_method = the_interface.methods[j];
+					if(the_method.id == info_obj.id) {
+						the_method.name = info_obj.name;
+						the_method.ret = info_obj.ret;
+						the_method.args = info_obj.args;
+						the_method.scope = info_obj.scope;
+						the_method.description = info_obj.description;
+					}
+				}
 				the_obj = the_interface;
 			}
 		}
@@ -123,5 +132,38 @@ function modifyMethod(info_obj) {
 	}
 }
 function deleteMethod(info_obj) {
-	
+	var the_obj = null;
+	if(info_obj.parent_type != "interface") {
+		for(var i in project.classes) {
+			var the_class = project.classes[i];
+			if(the_class.id == info_obj.parent) {
+				for(var j in the_class.methods) {
+					var the_method = the_class.methods[j];
+					if(the_method.id == info_obj.id) {
+						the_class.methods.splice(j,1);
+					}
+				}
+				the_obj = the_class;
+			}
+		}
+	}
+	else {
+		for(var i in project.interfaces) {
+			var the_interface = project.interfaces[i];
+			if(the_interface.id == info_obj.parent) {
+				for(var j in the_interface.methods) {
+					var the_method = the_interface.methods[j];
+					if(the_method.id == info_obj.id) {
+						the_interface.methods.splice(j,1);
+					}
+				}
+				the_obj = the_interface;
+			}
+		}
+	}
+	if(the_obj) {
+		if($("#current-object-id").text() == the_obj.id) {
+			loadMethodsDetail(the_obj);
+		}
+	}
 }

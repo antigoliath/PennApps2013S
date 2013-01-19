@@ -29,7 +29,7 @@ function loadObjectDetail(the_obj) {
 }
 
 function loadObjInfoDetail(the_obj) {
-			var edit_obj = $(".edit-object");
+			var edit_obj = $(".edit-object");	
 			edit_obj.attr("id","edit-object-"+the_obj.id);
 			edit_obj.find(".info .name").text(the_obj.name);
 			edit_obj.find(".info .description").text(the_obj.description);
