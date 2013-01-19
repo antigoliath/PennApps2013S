@@ -38,7 +38,6 @@ function java_skeleton(json)
 	if(attributes){
 		for(var xy in attributes)
 		{
-			alert(xy)
 			class_string = class_string + "\t" + attr_string(attributes[xy])
 		}
 	}
@@ -76,18 +75,18 @@ function method_string(method)
 	var argument_string = arguments.join(", ")
 
 	return method.scope + " " + method.ret + " " + method.name + "(" +
-		argument_string + ")\n{\t//TODO\n}\n"
+		argument_string + ")\n\t{\n\t\t//TODO\n\t}\n"
 }
 
 function javadoc(method)
 {
-	var retstring = "/* \n"
-	retstring = retstring + "* " + method.description + "\n"
+	var retstring = "\n\t/* \n"
+	retstring = retstring + "\t* " + method.description + "\n"
 	for(var xy in method.args)
 	{
-		retstring = retstring + "* " + "@param " + method.args[xy].name + " " + 
+		retstring = retstring + "\t* " + "@param " + method.args[xy].name + " " + 
 		method.args[xy].description + "\n"
 	}
-	retstring = retstring + "* " + "@return " +  method.ret + "\n*/"
+	retstring = retstring + "\t* " + "@return " +  method.ret + "\n\t*/\n"
 	return retstring
 }
