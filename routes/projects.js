@@ -2,12 +2,12 @@
 
 var models = require('../models/models.js');
 
-exports.list = function(req, res){
-  res.render('new', { title: 'projects list' });
-};
-
-exports.projects = function(req, res){
-  res.render('list', { title: 'projects list' });
+exports.json = function(req, res){
+  var new_project = models.Project.find().exec(
+    function (err, results) {
+      res.json(results);
+    } 
+  );
 };
 
 exports.new_project = function(req, res){
@@ -71,4 +71,8 @@ exports.create_interface = function(req, res) {
       console.log('creating interface');
     }
   });
+};
+
+exports.modify = function(req,res) {
+  
 };
