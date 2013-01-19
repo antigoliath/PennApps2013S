@@ -22,7 +22,6 @@ var Class = new mongoose.Schema({
       type: String,
       description: String
     }
-  
   ]
 });
 
@@ -40,7 +39,6 @@ var Interface = new mongoose.Schema({
       description: String
     }
   ]
-
 });
 
 exports.Interface = mongoose.model('Interface', Interface);
@@ -49,7 +47,8 @@ var Method = new mongoose.Schema({
   name: String,
   description: String,
   scope: String,
-  class: ObjectId,
+  parent: ObjectId,
+  parent_type: String, //class or interface
   ret: String,
   args: [
     {
