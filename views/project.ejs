@@ -46,7 +46,6 @@
 			 for(var i in project.interfaces) {
 				 project.interfaces[i].methods = [];
 			 }
-			 loadProjectDetail();
 			 $.ajax({
 				 method : "GET",
 				 url : "/methods/"+project_id+".json",
@@ -59,6 +58,7 @@
 			 console.log(project);
 			 socket.emit('openProject',{ project_id: project.id });
 		  }
+		  			 loadProjectDetail();
 		  });
 		  detailListeners();
 		  $(".edit-object").hide();
@@ -117,7 +117,7 @@
 					<option value="ruby">Ruby</option>
 					<option value="python">Python</option>
 					</select>
-				<div class="back">Back</div>
+				<div class="back">Hierarchial view</div>
 			</div>
 			<div class="add-controls">
 				<div class="add-class">Add a Class</div>
