@@ -8,7 +8,7 @@ var project = {
 		name : "Comment",
 		project : "1",
 		description : "It's a class for comments",
-		parent : "DBObj",
+		parent : ["DBObj"],
 		interfaces : ["Commentable","Likeable"],
 		attributes : [
 		{scope : "private", name : "id", attr_type : "int", description : "The DB id."},

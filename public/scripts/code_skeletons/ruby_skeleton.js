@@ -1,7 +1,8 @@
-export.ruby_skeleton = function(json)
+function ruby_skeleton(json)
 {
 	var body = JSON.parse(json)
 	var class_string = ""
+	var _warnings = []
 
 	//get class info
 	var _class =  body.class
@@ -73,7 +74,7 @@ export.ruby_skeleton = function(json)
 	}
 
 	class_string = class_string + "\nend"
-	return class_string
+	return {class: class_string, warnings: _warnings}
 }
 
 function ruby_attr_string(attr)
