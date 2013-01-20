@@ -26,7 +26,7 @@ function detailListeners() {
 function resetAddClass() {
 	var the_class = {name : "", description : "", parents : [], attributes : [], interfaces : []}
 	$("#class-name-textbox").val("");
-	$("#class-description-textbox").val("Description of MyClass");
+	$("#class-description-textbox").val("Description of the class");
 	$("#create-class").unbind("click");
 	$("#create-class").click(function() {
 		the_class.name = $("#class-name-textbox").val();
