@@ -22,6 +22,7 @@ exports.start_sockets = function(server){
     console.log('connected bro');
     client.on('saveAction', function(data){
       console.log('inside socket save action');
+      console.log(data);
       saveActionHelper(data);
     });
   });
