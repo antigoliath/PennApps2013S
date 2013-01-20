@@ -66,6 +66,7 @@ app.get('/', routes.index);
 app.get('/test', test.test);
 app.get('/project', project.view);
 app.get('/projects/new', projects.new_project);
+app.get('/projects/:id.json', projects.view_json);
 app.get('/projects/:id', projects.view);
 app.get('/users', user.list);
 app.get('/projects.json', projects.project_json);
