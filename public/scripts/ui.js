@@ -152,6 +152,39 @@ function resetAddMethod() {
 	});
 }
 
+function classListeners() {
+	$(".info .name").unbind('click');
+	$('.info .name span').click(function() {
+		var _class = $(this).parent().parent();
+		var _name = _class.find('.name').text();
+		var _desc = _class.find('.description').text().replace('"',"&quot;");
+		_class.find('.name').addClass("inputed");
+		_class.find('.name').html("<input type='text' class='edit-class-name-"+_name+"' value='"+_name+"'/>");
+		_class.find('.description').html('<input class="edit-class-desc-'+_name+'" value="'+_desc+'" />');
+		_class.find(".name:first input").focus();
+		_class.find('input').keydown(function(event) {
+			if(event.keyCode == 13) {
+				var n_name =$('.edit-class-name-'+_name).val();
+				var n_desc =$('.edit-class-desc-'+_name).val();
+				
+				var obj_type = $("#current-object-type").text();
+				var modified_class = getInterClass($("#current-object-id").text(),obj_type);
+				modified_class.name = n_name;
+				modified_class.description = n_desc;
+				var data = {
+					action : "modify",
+					type : obj_type,
+					info : modified_class,
+					project_id : $("#current-project-id").text()
+				}
+				console.log(data);
+				saveAction(data);
+			}
+		});
+		
+	});
+}
+
 function attributeListeners() {
 		$('.attribute .delete').unbind('click');
 		$('.attribute .delete').click(function() {
@@ -276,7 +309,7 @@ function methodListeners() {
 			
 		});
 		
-		the_method.find(".delete").click(function() {
+		the_method.find(".delete:first").click(function() {
 					var modified_method = getMethod(
 					the_method.find(".method-id").text(),
 					$("#current-object-id").text(),
@@ -291,6 +324,83 @@ function methodListeners() {
 					console.log(data);
 					saveAction(data);
 		});
+		
+		the_method.find(".argument").each(function() {
+			var the_arg = $(this);
+			the_arg.find('.delete').unbind('click');
+			the_arg.find('.delete').click(function() {
+						var modified_method = getMethod(
+						the_method.find(".method-id").text(),
+						$("#current-object-id").text(),
+						$("#current-object-type").text()
+						);
+						for(var j in modified_method.args) {
+							if(modified_method.args[j].name == the_arg.find('.name').text()) {
+								modified_method.args.splice(j,1);
+							}
+						}
+						var data = {
+							action : "modify",
+							type : "method",
+							info : modified_method,
+							project_id : $("#current-project-id").text()
+						}
+						console.log(data);
+						saveAction(data);
+			});
+			
+			the_arg.find('.name span').unbind('click');
+			the_arg.find('.name span').click(function() {
+				var _arg = the_arg;
+				var _name = _arg.find('.name:first').text();
+				var _type = _arg.find('.type').text();
+				var _desc = _arg.find('.description:first').text().replace('"',"&quot;");
+				_arg.find('.name:first').addClass("inputed");
+				_arg.find('.type').addClass("inputed");
+				_arg.find('.name:first').html("<input type='text' class='edit-arg-name-"+_name+"' value='"+_name+"'/>");
+				_arg.find('.type').html("<input type='text' class='edit-arg-type-"+_name+"' value='"+_type+"'/>");
+				_arg.find('.description:first').html('<input class="edit-arg-desc-'+_name+'" value="'+_desc+'" />');
+				_arg.find(".name:first input").focus();
+				_arg.find('input').keydown(function(event) {
+					if(event.keyCode == 13) {
+						var n_name = $('.edit-arg-name-'+_name).val();
+						var n_type = $('.edit-arg-type-'+_name).val();
+						var n_desc = $('.edit-arg-desc-'+_name).val();
+										
+						_arg.find('.name:first').removeClass("inputed");
+						_arg.find('.return-type').removeClass("inputed");
+
+						//_arg.find('.name:first').html("<span>"+n_name+"</span>");
+						//_arg.find('.return-type').html(n_type);
+						//_arg.find('.description:first').html(n_desc);
+						
+						
+						var modified_method = getMethod(
+						the_method.find(".method-id").text(),
+						$("#current-object-id").text(),
+						$("#current-object-type").text()
+						);
+						for(var j in modified_method.args) {
+							if(modified_method.args[j].name == _name) {
+								modified_method.args[j].name = n_name;
+								modified_method.args[j].type = n_type;
+								modified_method.args[j].description = n_desc;
+							}
+						}
+						var data = {
+							action : "modify",
+							type : "method",
+							info : modified_method,
+							project_id : $("#current-project-id").text()
+						}
+						console.log(data);
+						saveAction(data);
+					}
+				});
+				
+			});
+		});
+		
 		resetAddArgument(the_method);
 		
 	});

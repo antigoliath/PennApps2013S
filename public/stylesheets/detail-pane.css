@@ -61,6 +61,11 @@
 	margin-top: 5px;
 }
 
+.edit-object .argument .description input {
+	margin-top: -4px;
+	height: 18px;
+}
+
 .edit-object .vital-info .scope {
 	padding-top: 2px;
 	font-size: 80%;

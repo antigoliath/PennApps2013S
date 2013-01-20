@@ -1,4 +1,4 @@
-//var socket = io.connect("http://localhost");
+//var socket = io.connect("http://localhost:");
 
 function saveAction(action_obj) {
 	//socket.emit('saveAction',action_obj);

@@ -25,13 +25,12 @@ function loadObjectDetail(the_obj) {
 		loadMethodsDetail(the_obj);
 		resetAddAttribute();  
 		resetAddMethod();
-	
 }
 
 function loadObjInfoDetail(the_obj) {
 			var edit_obj = $(".edit-object");	
 			edit_obj.attr("id","edit-object-"+the_obj.id);
-			edit_obj.find(".info .name").text(the_obj.name);
+			edit_obj.find(".info .name").html("<span>"+the_obj.name+"</span>");
 			edit_obj.find(".info .description").text(the_obj.description);
 			
 			var attrs = edit_obj.find(".attributes");
@@ -48,7 +47,7 @@ function loadObjInfoDetail(the_obj) {
 				'<div class="description">'+the_attr.description+'</div>'+
 				'</div>');
 			}
-	
+		classListeners();
 		attributeListeners();
 }
 function loadMethodsDetail(the_obj) { 
