@@ -1,6 +1,9 @@
-function update_codeview(_class, _interfaces)
+function update_codeview(_class, _interfaces, flag, lang)
 {
-	var theskeleton = java_skeleton(_class, _interfaces)
+	if(lang == "java")
+	{
+		var theskeleton = java_skeleton(_class, _interfaces, flag)
+	}
 	var bigstring = "<pre><code>" + 
 		hljs.highlightAuto(theskeleton.code).value + 
 		"</code></pre>"

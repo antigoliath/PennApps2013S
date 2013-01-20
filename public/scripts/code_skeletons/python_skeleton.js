@@ -1,42 +1,47 @@
-function python_skeleton(json)
+function python_skeleton(_class, _interfaces)
 {
-	var body = JSON.parse(json)
 	var class_string = ""
 	var _warnings = []
 
 	//get class info
-	var _class =  body.class
 	var id = _class.id
 	var name = _class.name
 	var description = _class.description
 	var attributes = _class.attributes
-	console.log(attributes)
 
 	//get methods
-	var methods = body.methods
+	var methods = _class.methods
 
 	//get parent info if exists
 	var parent = _class.parent
 	var parname = ""
+	if (parent)
+	{
+		var parname = " extends " + parent.join(", ")
+	}
 
 	//get interfaces info if exists
-	var interfaces = body.interfaces
-	var int_names = []
-	var intmethods = []
-	if(interfaces[0])
+	var interfaces = _class.interfaces
+
+	for(var inter in interfaces)
 	{
-		for(var i in interfaces)
+		if(parent.indexOf(interfaces[inter]) == -1)
 		{
-			parent.push(interfaces[i].name)
-			if(interfaces[i].methods[0])
+			parent.push(interfaces[inter])
+
+			for(var _inter in _interfaces)
 			{
-				for(var j in interfaces[i].methods)
+				if(interfaces[inter] == _interfaces[_inter].name)
 				{
-					methods.push(interfaces[i].methods[j])
+					for(var meth_y in _interfaces[_inter].methods)
+					{
+						methods.push(_interfaces[_inter].methods[meth_y])
+					}
 				}
 			}
 		}
 	}
+	console.log(parent)
 
 	//build the parents array before creating string in ruby,
 	//treating interfaces like parents because there are no interfaces
@@ -47,7 +52,7 @@ function python_skeleton(json)
 
 	//build the string
 	class_string = class_string + "# " + description + "\n" + "class "
-	class_string = class_string + name + parname  + "\n"
+	class_string = class_string + name + parname  + "\n\n"
 
 	//build constructor
 	class_string = class_string + "\t" + python_constructor(attributes)
@@ -58,41 +63,25 @@ function python_skeleton(json)
 			class_string = class_string + "\t" + python_method_string(methods[xy])
 		}
 	}
-	if(intmethods[0]){
-		for(var xy in intmethods)
-		{
-			class_string = class_string + "\t" + python_method_string(intmethods[xy])
-		}
-	}
 
-	return {class: class_string, warnings: _warnings}
-}
-
-function python_attr_string(attr)
-{
-	var attr_scope = ""
-	if(attr.scope == "private")
-	{
-		attr_scope = "attr_reader "
-	}
-	else
-	{
-		attr_scope = "attr_accessor "
-	}
-	return attr_scope + " :" + attr.name + "\n"
+	return {code: class_string, warnings: _warnings}
 }
 
 function python_method_string(method)
 {
 	var arguments = ["self"]
+	var inputs = []
 	for(var xy in method.args)
 	{
 		arguments.push(method.args[xy].name)
+		inputs.push(":param "+ method.args[xy].name+": " +
+			method.args[xy].description)
 	}
 	var argument_string = arguments.join(", ")
 
 	return "def "+ method.name + "(" +
-		argument_string + ")\n\t\t# " + method.description + "\n\t\t#TODO\n\n"
+		argument_string + ")\n\t\t\"\"\"" + method.description +
+		"\n\t\t"+inputs.join("\n\t\t")+"\"\"\"\n\t\t#TODO\n\n"
 }
 
 function python_constructor(attr)
