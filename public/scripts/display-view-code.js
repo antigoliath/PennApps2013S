@@ -2,6 +2,7 @@ var lang = "java"
 
 function update_codeview(_class, _interfaces, flag)
 {
+	$('#canvas').html("")
 	if(lang == "java")
 	{
 		var theskeleton = java_skeleton(_class, _interfaces, flag)
