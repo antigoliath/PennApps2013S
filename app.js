@@ -59,7 +59,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-  mongoose.connect(ENV['MONGOHQ_URL']);
+  mongoose.connect(process.env.MONGOHQ_URL);
 });
 
 app.get('/', routes.index);
