@@ -36,7 +36,11 @@ function ruby_skeleton(_class, _interfaces)
 				{
 					for(var meth_y in _interfaces[_inter].methods)
 					{
-						methods.push(_interfaces[_inter].methods[meth_y])
+						var method_x = _interfaces[_inter].methods[meth_y]
+						if(methods.indexOf(method_x) == -1)
+						{
+							methods.push(method_x)
+						}
 					}
 				}
 			}
