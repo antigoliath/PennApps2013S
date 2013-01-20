@@ -5,6 +5,7 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , test = require('./routes/test')
   , user = require('./routes/user')
   , projects = require('./routes/projects')
   , http = require('http')
@@ -59,6 +60,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/test', test.test);
 app.get('/project', project.view);
 app.get('/users', user.list);
 app.get('/projects.json', projects.project_json);
