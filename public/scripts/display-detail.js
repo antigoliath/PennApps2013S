@@ -25,6 +25,7 @@ function loadObjectDetail(the_obj) {
 		loadMethodsDetail(the_obj);
 		resetAddAttribute();  
 		resetAddMethod();
+		$(".edit-object").show();
 }
 
 function loadObjInfoDetail(the_obj) {
@@ -84,7 +85,7 @@ function loadMethodsDetail(the_obj) {
 								'<div class="method-id">'+the_method.id+'</div>'+
 								'<div class="form-state">0</div>'+
 								'<div class="argument-prompt prompt"></div>'+
-								'<div class="argument-preview"></div>'+
+								'<div class="argument-preview preview"></div>'+
 								'<div class="argument-form">'+
 										'<input class="argument-textbox" type="text" />'+
 								'</div>'+

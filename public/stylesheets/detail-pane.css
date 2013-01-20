@@ -14,6 +14,7 @@
 
 .edit-object {
 	margin-top : 20px;
+	position: relative;
 }
 
 /*
@@ -72,6 +73,12 @@
 	color: #99f;
 }
 
+.edit-object .vital-info .type {
+	padding-top: 2px;
+	font-size: 90%;
+	color: #393;
+}
+
 .edit-object .vital-info .name {
 	font-weight: bold;
 }
@@ -82,9 +89,76 @@
 	color: #f99;
 }
 
-.edit-object .prompt span {
+.detail-panel .prompt span {
 	font-size: 80%;
 	color: #999;
+}
+
+.detail-panel .preview > div {
+	float: left;
+	width: 33%;
+}
+
+.detail-panel .preview .name {
+	font-weight: bold;
+}
+
+.detail-panel .preview .type {
+	color: #393;
+}
+
+/*
+ * Add object styling
+ * /
+ */
+.add-controls {
+	width: 100%;
+	height: 30px;
+}
+ 
+.add-controls > div {
+	float: left;
+	width: 29%;
+	padding: 5px 2%;
+}
+
+.add-object input {
+	padding: 5px 2%;
+	width: 96%;
+	height: 25px;
+	font-size: 120%;
+}
+
+.add-object textarea {
+	width: 96%;
+	min-height: 60px;
+	margin-top: 5px;
+	padding: 5px 2%;
+}
+
+#add-class, #add-attribute, #add-method {
+	display: none;
+}
+
+#add-class input {
+	width: 66%;
+}
+
+#add-class select {
+	float: right;
+	width: 28%;
+	font-size: 120%;
+	height: 38px;
+}
+
+#create-class {
+	width: 100%;
+	text-align: center;
+	font-size: 120%;
+	font-weight: bold;
+	padding: 5px 0px;
+	background: #efefef;
+	cursor: pointer;
 }
 
 /*
@@ -95,6 +169,23 @@
 	font-size: 150%;
 }
 
+/*
+ * 
+ * Relations styling
+ */
+.relations {
+	position: absolute;
+	right: -50px;
+	
+}
+
+.relations > div > div {
+	padding: 5px 10px;
+}
+
+.relations .parent {
+	background: #171;
+}
 
 /*
  * Attribute styling

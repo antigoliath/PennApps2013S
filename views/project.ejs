@@ -21,6 +21,7 @@
   <body>
 	  <script type='text/javascript'>
 	  $(document).ready(function() {
+		  detailListeners();
 		  loadInterfaceDetail(1);
 		  loadClassDetail(1);
 	  });
@@ -30,15 +31,57 @@
 			<div class="project-info">
 				<div class="back">Back</div>
 			</div>
+			<div class="add-controls">
+				<div class="add-class">Add a Class</div>
+				<div class="add-attributes">Add Attributes</div>
+				<div class="add-methods">Add Methods</div>
+			</div>
 			<div id="detail-hidden-info">
 				<div id="current-project-id"></div>
 				<div id="current-object-id">1</div>
 				<div id="current-object-type">class</div>
 			</div>
+			<div class="add-object">
+				<div id="add-class">
+					<div class="class-form">
+						<input id="class-name-textbox" type="text" placeholder="MyClass"/>
+						<select id="class-type">
+							<option selected="selected" value='class'>Class</option>
+							<option value='interface'>Interface</option>
+						</select>
+						<textarea id="class-description-textbox">Description of MyClass</textarea>
+						<div id="create-class">Create Class</div>
+					</div>
+				</div>
+				<div id="add-attribute">
+					<div class="attribute-prompt prompt">Enter an attribute name to get started.</div>
+					<div class="attribute-preview preview"></div>
+					<div class="attribute-form">
+						<div class="form-state"></div>
+						<input id="attribute-textbox" type="text" />
+					</div>
+				</div>
+				<div id="add-method">
+					<div class="method-prompt prompt">Enter a method name to get started.</div>
+					<div class="method-preview preview"></div>
+					<div class="method-form">
+						<div class="form-state"></div>
+						<input id="method-textbox" type="text" />
+					</div>
+				</div>
+			</div>
 			<div id="edit-object-IDGOESHERE" class="edit-object">
 				<div class="info">
 					<div class="name">Name</div>
 					<div class="description">Put a description here...</div>
+				</div>
+				<div class="relations">
+					<div class="parents">
+						<div class="parent">MyParent</div>
+					</div>
+					<div class="interfaces">
+						<div class="interface">My Interface</div>
+					</div>
 				</div>
 				<div class="attributes">
 					<h3>Attributes</h3>
@@ -86,32 +129,16 @@
 				</div>
 				
 				
-				<div id="add-attribute">
-					<div class="attribute-prompt prompt">Enter an attribute name to get started.</div>
-					<div class="attribute-preview"></div>
-					<div class="attribute-form">
-						<div class="form-state"></div>
-						<input id="attribute-textbox" type="text" />
-					</div>
-				</div>
-				<div id="add-method">
-					<div class="method-prompt prompt">Enter a method name to get started.</div>
-					<div class="method-preview"></div>
-					<div class="method-form">
-						<div class="form-state"></div>
-						<input id="method-textbox" type="text" />
-					</div>
-				</div>
 			
 			</div>
 		</div>
 		<div class="visualizer-panel">
 			<div class="code-view">
-				<div class="the-code"></div>
+				<span class="the-code" style="width:80%"></div>
+				<span class="warnings-panel" style="float:right"></span>
 			</div>
 			<div class="hierarchical-view"></div>
 		</div>
-		<div class="warnings-panel"></div>
     </div>
   </body>
 </html>
