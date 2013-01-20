@@ -1,38 +1,43 @@
-function ruby_skeleton(json)
+function ruby_skeleton(_class, _interfaces)
 {
-	var body = JSON.parse(json)
 	var class_string = ""
 	var _warnings = []
 
 	//get class info
-	var _class =  body.class
 	var id = _class.id
 	var name = _class.name
 	var description = _class.description
 	var attributes = _class.attributes
-	console.log(attributes)
 
 	//get methods
-	var methods = body.methods
+	var methods = _class.methods
+	console.log(methods)
 
 	//get parent info if exists
 	var parent = _class.parent
 	var parname = ""
+	if (parent)
+	{
+		var parname = " extends " + parent.join(", ")
+	}
 
 	//get interfaces info if exists
-	var interfaces = body.interfaces
-	var int_names = []
-	var intmethods = []
-	if(interfaces[0])
+	var interfaces = _class.interfaces
+
+	for(var inter in interfaces)
 	{
-		for(var i in interfaces)
+		if(parent.indexOf(interfaces[inter]) == -1)
 		{
-			parent.push(interfaces[i].name)
-			if(interfaces[i].methods[0])
+			parent.push(interfaces[inter])
+
+			for(var _inter in _interfaces)
 			{
-				for(var j in interfaces[i].methods)
+				if(interfaces[inter] == _interfaces[_inter].name)
 				{
-					methods.push(interfaces[i].methods[j])
+					for(var meth_y in _interfaces[_inter].methods)
+					{
+						methods.push(_interfaces[_inter].methods[meth_y])
+					}
 				}
 			}
 		}
@@ -65,16 +70,9 @@ function ruby_skeleton(json)
 			class_string = class_string + "\t" + ruby_method_string(methods[xy])
 		}
 	}
-	if(intmethods[0]){
-		for(var xy in intmethods)
-		{
-			class_string = class_string + "\t" + rubydoc(intmethods[xy])
-			class_string = class_string + "\t" + ruby_method_string(intmethods[xy])
-		}
-	}
 
 	class_string = class_string + "\nend"
-	return {class: class_string, warnings: _warnings}
+	return {code: class_string, warnings: _warnings}
 }
 
 function ruby_attr_string(attr)

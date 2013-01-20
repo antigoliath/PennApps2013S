@@ -1,4 +1,4 @@
-function java_skeleton(_class, _interfaces)
+function java_skeleton(_class, _interfaces, flag)
 {
 	var class_string = ""
 	var _warnings = []
@@ -26,13 +26,18 @@ function java_skeleton(_class, _interfaces)
 
 	for(var inter in interfaces)
 	{
-		for(var _inter in _interfaces)
+		if(parent.indexOf(interfaces[inter]) == -1)
 		{
-			if(interfaces[inter] == _interfaces[_inter].name)
+			parent.push(interfaces[inter])
+
+			for(var _inter in _interfaces)
 			{
-				for(var meth_y in _interfaces[_inter].methods)
+				if(interfaces[inter] == _interfaces[_inter].name)
 				{
-					methods.push(_interfaces[_inter].methods[meth_y])
+					for(var meth_y in _interfaces[_inter].methods)
+					{
+						methods.push(_interfaces[_inter].methods[meth_y])
+					}
 				}
 			}
 		}
@@ -44,17 +49,34 @@ function java_skeleton(_class, _interfaces)
 		intstring = " implements " + interfaces.join(", ")
 	}
 
-	//build the string
-	class_string = class_string + "/* " + description + " */\n" + "public class "
-	class_string = class_string + name + parname + intstring + " {\n"
+	if(flag == "class")
+	{
+		//build the string for a class
+		class_string = class_string + "/* " + description + 
+		" */\n" + "public class "
+		class_string = class_string + name + parname + 
+		intstring + " {\n"
+	}
+	else if(flag == "interface")
+	{
+		//build the string for an interface
+		class_string = class_string + "/* " + description + 
+		" */\n" + "public interface "
+		class_string = class_string + name + parname + 
+		intstring + " {\n"	
+	}
 	if(attributes[0]){
 		for(var xy in attributes)
 		{
 			class_string = class_string + "\t" + attr_string(attributes[xy], _warnings)
 		}
 	}
-	//init constructor here
-	class_string = class_string + "\n"+ java_constructor(_class)
+
+	if(flag == "class")
+	{
+		//init constructor here
+		class_string = class_string + "\n"+ java_constructor(_class)
+	}
 
 	if(methods[0]){
 		for(var xy in methods)
@@ -69,7 +91,8 @@ function java_skeleton(_class, _interfaces)
 
 function attr_string(attr, warn)
 {
-	var attr_name = check_warnings(attr.type, warn)
+	console.log(attr)
+	var attr_name = check_warnings(attr.attr_type, warn)
 	return attr.scope + " " + attr_name + " " + attr.name + ";\n"
 }
 
@@ -78,7 +101,7 @@ function method_string(method, warn)
 	var arguments = []
 	for(var xy in method.args)
 	{
-		arguments.push(method.args[xy].type + " " + method.args[xy].name)
+		arguments.push(method.args[xy].attr_type + " " + method.args[xy].name)
 	}
 	var argument_string = arguments.join(", ")
 	var ret_type = check_warnings(method.ret, warn)
@@ -108,9 +131,9 @@ function java_constructor(_class)
 	{
 		for(var a in _class.attributes)
 		{
-			attr.push(_class.attributes[a].type + " " +
+			attr.push(_class.attributes[a].attr_type + " " +
 				_class.attributes[a].name)
-			initstring.push("self"+"."+_class.attributes[a].name+" = "+
+			initstring.push("this"+"."+_class.attributes[a].name+" = "+
 				_class.attributes[a].name+";")
 		}
 	}
@@ -129,8 +152,6 @@ function check_warnings(name, warn)
 	}*/
 
 	var attr_type = name.toLowerCase()
-
-	alert(attr_type)
 
 	if (attr_type)
 	{
