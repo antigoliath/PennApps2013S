@@ -7,6 +7,10 @@ var Project = new mongoose.Schema({
   description: String
 });
 
+// Project.virtual('id').get(function(){
+//   return this._id;
+// });
+
 exports.Project = mongoose.model('Project', Project);
 
 var Class = new mongoose.Schema({

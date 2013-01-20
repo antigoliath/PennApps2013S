@@ -26,7 +26,136 @@ exports.start_sockets = function(server){
     });
   });
 };
+var project = {
+	id : "1",
+	name : "My Project",
+	description : "It's a frickin awesome project",
+	classes : [
+	{
+		id : "1",
+		name : "Comment",
+		project : "1",
+		description : "It's a class for comments",
+		parent : ["DBObj"],
+		interfaces : ["Commentable","Likeable"],
+		attributes : [
+		{scope : "private", name : "id", attr_type : "int", description : "The DB id."},
+		{scope : "private", name : "comment", attr_type : "string", description : "The comment"}
+		],
+		methods : [
+      {
+        id :  "1",
+        scope : "public",
+        name : "like",
+        description : "testing",
+        parent : "1",
+        parent_type : "class",
+        ret : "void",
+        args : [
+          { name : "user", attr_type : "User", description : "The user liking it" },
+          { name : "timestamp", attr_type : "long", description : "The UNIX timestamp" }
+        ]
+      }
+		]
+	}
+	],
+	interfaces : [
+	{
+		id : "1",
+		name : "Commentable",
+		project : "1",
+		description : "Interface for things that are commentable",
+		attributes : [
+		{scope : "private", name : "other_id", attr_type : "int", description : "The other id."},
+		{scope : "private", name : "details", attr_type : "string", description : "Some details."}
+		],
+		methods : [
+		{
+			id :  "1",
+			scope : "public",
+			name : "addComment",
+			parent : "1",
+			parent_type : "interface",
+			ret : "boolean",
+			args : [
+			{name : "comment", attr_type : "string", description : "The comment to add"},
+			{name : "user", attr_type : "User", description : "The user commenting."}
+			]
+		}
+		]
+	}
+	]
+};
 
+
+
+exports.view = function(req, res) {
+  console.log(req.params.id);
+  models.Project.findById(req.params.id, function(err, project_result){
+    if(err) {
+      console.log('ERROR: project search failed');
+      console.log(err);
+      return;
+    } 
+    else {
+      console.log(project_result);
+      console.log(project_result.id);
+      models.Interface.find({ project: project_result.id }, function(err, interface_result){
+        if(err) {
+          console.log('ERROR: interface search failed');
+          console.log(err);
+          return;
+        } 
+        else {
+          _.each(interface_result, function(interface_item){
+            project_result.interfaces = project_result.interfaces || [];
+            models.Method.find({ parent: interface_item.id}, function(err, method_result){
+              if(err){
+                console.log('ERROR: method search failed');
+                console.log(err);
+                return;     
+              } 
+              else {
+                _.each(method_result, function(method_item){
+                  interface_item.methods = interface_item.methods || [];
+                  interface_item.methods.push(method_item);
+                });
+              }
+            });
+            project_result.interfaces.push(interface_item);
+          });
+        }
+      });
+
+      models.Class.find({ project: project_result.id }, function(err, class_result){
+        if(err) {
+          console.log('ERROR: class search failed');
+          console.log(err);
+          return;
+        } 
+        else {
+          _.each(class_result, function(class_item){
+            project_result.classes = project_result.classes || [];
+            models.Method.find({ parent: class_item.id}, function(err, method_result){
+              if(err){
+                console.log('ERROR: method search failed');
+                console.log(err);
+                return;     
+              } 
+              else {
+                _.each(method_result, function(method_item){
+                  class_item.methods = class_item.methods || [];
+                  class_item.methods.push(method_item);
+                });
+              }
+            });
+            project_result.classes.push(class_item);
+          });
+        }
+      });
+    }
+  }); 
+};
 
 
 
