@@ -55,23 +55,23 @@ function update_hierarchy(project)
 			}
 			depth += 1
 		}
-		var _fill = "red"
+		var _fill = "orange"
 
 		if(depth > 0)
 		{
-			_fill = "orange"
+			_fill = "yellow"
 		}
 		if(depth > 1)
 		{
-			_fill = "yellow"
+			_fill = "green"
 		}
 		if(depth > 2)
 		{
-			_fill = "green"
+			_fill = "blue"
 		}
 		if(depth > 3)
 		{
-			_fill = "blue"
+			_fill = "purple"
 		}
 
 		var x_width = 140
