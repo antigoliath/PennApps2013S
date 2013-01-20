@@ -22,7 +22,6 @@
   <body>
 	  <script type='text/javascript'>
 		  var project = null;
-		  var tmp_methods = [];
 	  $(document).ready(function() {
 		  var project_id = '<%= project_id %>';
 		  $.ajax({
@@ -39,9 +38,15 @@
 				 project.interfaces[i].methods = [];
 			 }
 			 loadProjectDetail();
-			 for(var i in tmp_methods) {
-				 processAction({ action : "add", type :"method", info: tmp_methods[i] });
-			 }
+			 $.ajax({
+				 method : "GET",
+				 url : "/methods/"+project_id+".json",
+				 success : function(data) {
+						 for(var i in data) {
+							 processAction({ action : "add", type :"method",info : data[i] });
+						 }
+					 }
+				 });
 			 console.log(project);
 			 socket.emit('openProject',{ project_id: project.id });
 		  }
@@ -56,7 +61,6 @@
 				<div class="title">Project Title</div>
 				<div class="description">Description of project...</div>
 				<div class="back">Back</div>
-				
 			</div>
 			<div class="add-controls">
 				<div class="add-class">Add a Class</div>
