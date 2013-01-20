@@ -28,79 +28,213 @@ exports.start_sockets = function(server){
   });
 };
 
+//TODO: REFACTOR
+
+exports.view_json = function(req, res) {
+  var proj_id = req.params.id;
+  console.log(proj_id);
+    models.Project.findById(proj_id, function(err, project_result){
+      if(err) {
+        console.log('ERROR: project search failed');
+        console.log(err);
+        return;
+      } 
+      else {
+        project_result = project_result.toObject();
+        // add correct id to js object
+        project_result.id = project_result._id.toString();
+        console.log(project_result);
+        console.log(project_result.id);
+        models.Interface.find({ project: project_result._id }, function(err, interface_result){
+          if(err) {
+            console.log('ERROR: interface search failed');
+            console.log(err);
+            return;
+          } 
+          else {
+            // convert from mongodbobject to js object
+            _.each(interface_result, function(interface_item){
+              console.log('over here')
+              console.log(interface_item)
+              interface_item = interface_item.toObject();
+              interface_item.id = interface_item._id.toString();
+              // convert from mongodbobject to js object
+              project_result.interfaces = project_result.interfaces || [];
+              models.Method.find({ parent: interface_item._id}, function(err, method_result){
+                // convert from mongodbobject to js object
+                if(err){
+                  console.log('ERROR: method search failed');
+                  console.log(err);
+                  return;     
+                } 
+                else {
+                  _.each(method_result, function(method_item){
+                    method_item = method_item.toObject();
+                    method_item.id = method_item._id;
+                    interface_item.methods = interface_item.methods || [];
+                    interface_item.methods.push(method_item);
+                  });
+
+
+
+          
+                  models.Class.find({ project: project_result._id }, function(err, class_result){
+                    if(err) {
+                      console.log('ERROR: class search failed');
+                      console.log(err);
+                      return;
+                    } 
+                    else {
+                      _.each(class_result, function(class_item){
+
+                        // convert from mongodbobject to js object
+                        class_item = class_item.toObject();
+                        class_item.id = class_item._id.toString();
+                        // convert mongodbobject to js object
+                        project_result.classes = project_result.classes || [];
+                        models.Method.find({ parent: class_item._id}, function(err, method_result){
+                          if(err){
+                            console.log('ERROR: method search failed');
+                            console.log(err);
+                            return;     
+                          } 
+                          else {
+                            _.each(method_result, function(method_item){
+                              method_item = method_item.toObject();
+                              method_item.id = method_item._id;
+                              class_item.methods = class_item.methods || [];
+                              class_item.methods.push(method_item);
+                            });
+                            
+
+                            // finally finished compiling entire json
+                            console.log('finally finished compiling');
+                            console.log("%j",project_result);
+                            res.json(project_result);
+
+
+
+                          }
+                        });
+                        project_result.classes.push(class_item);
+                      });
+                    }
+                  });
+
+
+
+                }
+              });
+              project_result.interfaces.push(interface_item);
+            });
+            
+                      }
+        });
+
+      }
+    }); 
+
+
+
+
+}
+
 exports.view = function(req, res) {
-  console.log(req.params.id);
-  models.Project.findById(req.params.id, function(err, project_result){
-    if(err) {
-      console.log('ERROR: project search failed');
-      console.log(err);
-      return;
-    } 
-    else {
-      console.log(project_result);
-      console.log(project_result.id);
-      models.Interface.find({ project: project_result.id }, function(err, interface_result){
-        if(err) {
-          console.log('ERROR: interface search failed');
-          console.log(err);
-          return;
-        } 
-        else {
-          _.each(interface_result, function(interface_item){
-            project_result.interfaces = project_result.interfaces || [];
-            models.Method.find({ parent: interface_item.id}, function(err, method_result){
-              if(err){
-                console.log('ERROR: method search failed');
+  var proj_id = req.params.id;
+  console.log(proj_id);
+    models.Project.findById(proj_id, function(err, project_result){
+      if(err) {
+        console.log('ERROR: project search failed');
+        console.log(err);
+        return;
+      } 
+      else {
+        project_result = project_result.toObject();
+        // add correct id to js object
+        project_result.id = project_result._id.toString();
+        console.log(project_result);
+        console.log(project_result.id);
+        models.Interface.find({ project: project_result._id }, function(err, interface_result){
+          if(err) {
+            console.log('ERROR: interface search failed');
+            console.log(err);
+            return;
+          } 
+          else {
+            // convert from mongodbobject to js object
+            _.each(interface_result, function(interface_item){
+              console.log('over here')
+              console.log(interface_item)
+              interface_item = interface_item.toObject();
+              interface_item.id = interface_item._id.toString();
+              // convert from mongodbobject to js object
+              project_result.interfaces = project_result.interfaces || [];
+              models.Method.find({ parent: interface_item._id}, function(err, method_result){
+                // convert from mongodbobject to js object
+                if(err){
+                  console.log('ERROR: method search failed');
+                  console.log(err);
+                  return;     
+                } 
+                else {
+                  _.each(method_result, function(method_item){
+                    method_item = method_item.toObject();
+                    method_item.id = method_item._id;
+                    interface_item.methods = interface_item.methods || [];
+                    interface_item.methods.push(method_item);
+                  });
+                }
+              });
+              project_result.interfaces.push(interface_item);
+            });
+            
+                
+            models.Class.find({ project: project_result._id }, function(err, class_result){
+              if(err) {
+                console.log('ERROR: class search failed');
                 console.log(err);
-                return;     
+                return;
               } 
               else {
-                _.each(method_result, function(method_item){
-                  interface_item.methods = interface_item.methods || [];
-                  interface_item.methods.push(method_item);
+                _.each(class_result, function(class_item){
+
+                  // convert from mongodbobject to js object
+                  class_item = class_item.toObject();
+                  class_item.id = class_item._id.toString();
+                  // convert mongodbobject to js object
+                  project_result.classes = project_result.classes || [];
+                  models.Method.find({ parent: class_item._id}, function(err, method_result){
+                    if(err){
+                      console.log('ERROR: method search failed');
+                      console.log(err);
+                      return;     
+                    } 
+                    else {
+                      _.each(method_result, function(method_item){
+                        method_item = method_item.toObject();
+                        method_item.id = method_item._id;
+                        class_item.methods = class_item.methods || [];
+                        class_item.methods.push(method_item);
+                        console.log('IM IN HEREREEEEEE')
+                      });
+                    }
+                  });
+                  project_result.classes.push(class_item);
                 });
+                // finally finished compiling entire json
+                console.log('finally finished compiling');
+                console.log("%j",project_result);
+                res.render('project', { title: 'Projects', project_id: project_result.id});
               }
             });
-            project_result.interfaces.push(interface_item);
-          });
-          
-              
-          models.Class.find({ project: project_result.id }, function(err, class_result){
-            if(err) {
-              console.log('ERROR: class search failed');
-              console.log(err);
-              return;
-            } 
-            else {
-              _.each(class_result, function(class_item){
-                project_result.classes = project_result.classes || [];
-                models.Method.find({ parent: class_item.id}, function(err, method_result){
-                  if(err){
-                    console.log('ERROR: method search failed');
-                    console.log(err);
-                    return;     
-                  } 
-                  else {
-                    _.each(method_result, function(method_item){
-                      class_item.methods = class_item.methods || [];
-                      class_item.methods.push(method_item);
-                    });
-                  }
-                });
-                project_result.classes.push(class_item);
-              });
-              // finally finished compiling entire json
-              res.render('project', { title: 'Projects', project_json: project_result});
-            }
-          });
-        }
-      });
+          }
+        });
 
-    }
-  }); 
+      }
+    }); 
+
+
 };
-
-
 
 function show_json(type, res) {
   var model;
