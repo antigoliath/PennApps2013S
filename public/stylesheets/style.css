@@ -13,6 +13,13 @@ body {
 	height: 100%;
 }
 
+.visualizer-panel {
+	float: left;
+	width: 70%;
+	height: 100%;
+	
+}
+
 a {
   color: #00B7FF;
 }
