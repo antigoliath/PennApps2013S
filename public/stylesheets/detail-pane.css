@@ -3,6 +3,7 @@
 	
 	float: left;
 	
+	overflow-y: auto;
 	width: 26%;
 	height: 100%;
 	padding: 0px 2%;
@@ -174,19 +175,37 @@
  * Relations styling
  */
 .relations {
-	position: absolute;
-	right: -50px;
-	
+	margin-top: 5px;
 }
-
-.relations > div > div {
-	padding: 5px 10px;
+ 
+.relations div, .relations input {
+	display: inline;
+	padding: 3px;
+	font-size: 70%;
+	border-radius: 2px;
+	color: white;
 }
 
 .relations .parent {
 	background: #171;
 }
 
+
+.relations .interface {
+	background: #117;
+}
+
+.relations .add-parent {
+	border: 1px solid #171;
+	color: black;
+	width: 60px;
+}
+
+.relations .add-interface {
+	border: 1px solid #117;
+	color: black;
+	width: 60px;
+}
 /*
  * Attribute styling
  * 
