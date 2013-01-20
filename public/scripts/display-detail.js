@@ -1,3 +1,11 @@
+function loadProjectDetail() {
+	$("#current-project-id").text(project.id);
+	$(".project-info .title").text(project.name);
+	if(project.classes && project.classes[0]) {
+		loadClassDetail(project.classes[0].id);
+	}
+}
+
 function loadClassDetail(class_id) {
 	for(var i in project.classes) {
 		if(project.classes[i].id == class_id) {
