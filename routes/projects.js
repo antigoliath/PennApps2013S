@@ -52,83 +52,134 @@ exports.view_json = function(req, res) {
             return;
           } 
           else {
-            // convert from mongodbobject to js object
-            _.each(interface_result, function(interface_item){
-              console.log('over here')
-              console.log(interface_item)
-              interface_item = interface_item.toObject();
-              interface_item.id = interface_item._id.toString();
+              console.log('insideeeeeeeeeeeeeeeeeeeeeee');
+              console.log(interface_result);
+            if(interface_result.length > 0) {
               // convert from mongodbobject to js object
-              project_result.interfaces = project_result.interfaces || [];
-              models.Method.find({ parent: interface_item._id}, function(err, method_result){
+              _.each(interface_result, function(interface_item){
+                console.log('over here')
+                console.log(interface_item)
+                interface_item = interface_item.toObject();
+                interface_item.id = interface_item._id.toString();
                 // convert from mongodbobject to js object
-                if(err){
-                  console.log('ERROR: method search failed');
+                project_result.interfaces = project_result.interfaces || [];
+                models.Method.find({ parent: interface_item._id}, function(err, method_result){
+                  // convert from mongodbobject to js object
+                  if(err){
+                    console.log('ERROR: method search failed');
+                    console.log(err);
+                    return;     
+                  } 
+                  else {
+                    _.each(method_result, function(method_item){
+                      method_item = method_item.toObject();
+                      method_item.id = method_item._id;
+                      interface_item.methods = interface_item.methods || [];
+                      interface_item.methods.push(method_item);
+                    });
+
+
+
+            
+                    models.Class.find({ project: project_result._id }, function(err, class_result){
+                      if(err) {
+                        console.log('ERROR: class search failed');
+                        console.log(err);
+                        return;
+                      } 
+                      else {
+                        _.each(class_result, function(class_item){
+
+                          // convert from mongodbobject to js object
+                          class_item = class_item.toObject();
+                          class_item.id = class_item._id.toString();
+                          // convert mongodbobject to js object
+                          project_result.classes = project_result.classes || [];
+                          models.Method.find({ parent: class_item._id}, function(err, method_result){
+                            if(err){
+                              console.log('ERROR: method search failed');
+                              console.log(err);
+                              return;     
+                            } 
+                            else {
+                              _.each(method_result, function(method_item){
+                                method_item = method_item.toObject();
+                                method_item.id = method_item._id;
+                                class_item.methods = class_item.methods || [];
+                                class_item.methods.push(method_item);
+                              });
+                              
+
+                              // finally finished compiling entire json
+                              console.log('finally finished compiling');
+                              console.log("%j",project_result);
+                              res.json(project_result);
+
+
+
+                            }
+                          });
+                          project_result.classes.push(class_item);
+                        });
+                      }
+                    });
+
+                  }
+                });
+                project_result.interfaces.push(interface_item);
+              });
+            }            
+            else {
+              models.Class.find({ project: project_result._id }, function(err, class_result){
+                if(err) {
+                  console.log('ERROR: class search failed');
                   console.log(err);
-                  return;     
+                  return;
                 } 
                 else {
-                  _.each(method_result, function(method_item){
-                    method_item = method_item.toObject();
-                    method_item.id = method_item._id;
-                    interface_item.methods = interface_item.methods || [];
-                    interface_item.methods.push(method_item);
-                  });
+                  if(class_result.length > 0) {
+                    _.each(class_result, function(class_item){
+                      // convert from mongodbobject to js object
+                      class_item = class_item.toObject();
+                      class_item.id = class_item._id.toString();
+                      // convert mongodbobject to js object
+                      project_result.classes = project_result.classes || [];
+                      models.Method.find({ parent: class_item._id}, function(err, method_result){
+                        if(err){
+                          console.log('ERROR: method search failed');
+                          console.log(err);
+                          return;     
+                        } 
+                        else {
+                          _.each(method_result, function(method_item){
+                            method_item = method_item.toObject();
+                            method_item.id = method_item._id;
+                            class_item.methods = class_item.methods || [];
+                            class_item.methods.push(method_item);
+                          });
+                          
+
+                          // finally finished compiling entire json
+                          console.log('finally finished compiling');
+                          console.log("%j",project_result);
+                          res.json(project_result);
 
 
 
-          
-                  models.Class.find({ project: project_result._id }, function(err, class_result){
-                    if(err) {
-                      console.log('ERROR: class search failed');
-                      console.log(err);
-                      return;
-                    } 
-                    else {
-                      _.each(class_result, function(class_item){
-
-                        // convert from mongodbobject to js object
-                        class_item = class_item.toObject();
-                        class_item.id = class_item._id.toString();
-                        // convert mongodbobject to js object
-                        project_result.classes = project_result.classes || [];
-                        models.Method.find({ parent: class_item._id}, function(err, method_result){
-                          if(err){
-                            console.log('ERROR: method search failed');
-                            console.log(err);
-                            return;     
-                          } 
-                          else {
-                            _.each(method_result, function(method_item){
-                              method_item = method_item.toObject();
-                              method_item.id = method_item._id;
-                              class_item.methods = class_item.methods || [];
-                              class_item.methods.push(method_item);
-                            });
-                            
-
-                            // finally finished compiling entire json
-                            console.log('finally finished compiling');
-                            console.log("%j",project_result);
-                            res.json(project_result);
-
-
-
-                          }
-                        });
-                        project_result.classes.push(class_item);
+                        }
                       });
-                    }
-                  });
+                      project_result.classes.push(class_item);
+                    });
+                  }
+                  else {
+                    // else no classes, no interfaces, render json
+                    res.json(project_result);
 
-
-
+                  }
                 }
               });
-              project_result.interfaces.push(interface_item);
-            });
-            
-                      }
+            }
+          }
         });
 
       }
@@ -277,18 +328,18 @@ exports.new_project = function(req, res){
 };
 
 exports.create_project = function(req,res) {
-  create_helper('project', req.body);
+  create_helper('project', req.body, res);
 };
 
 exports.create_class = function(req,res) {
-  create_helper('class', req.body);
+  create_helper('class', req.body, res);
 };
 
 exports.create_interface = function(req,res) {
-  create_helper('interface', req.body);
+  create_helper('interface', req.body, res);
 };
 exports.create_method = function(req,res) {
-  create_helper('method', req.body);
+  create_helper('method', req.body, res);
 };
 exports.save = function(req,res) {
   
@@ -303,14 +354,14 @@ exports.save = function(req,res) {
   //   project_id : "1244asdf"
   //   needed for emitting
   // }; 
-  saveActionHelper(req.body);
+  saveActionHelper(req.body, res);
 };
 
-function saveActionHelper(info){
+function saveActionHelper(info, res){
 
   switch(info.action)
   {
-    case 'add': create_helper(info.type, info.info);
+    case 'add': create_helper(info.type, info.info, res);
                 break;
     case 'modify': change_helper(info.type, info.info, 'modify');
                    break;
@@ -321,7 +372,7 @@ function saveActionHelper(info){
   }
 }
 
-function create_helper(type, info){
+function create_helper(type, info, res){
   var new_obj;
   var hex_string = info.project || info.parent;
   // create from hexstring
@@ -345,6 +396,8 @@ function create_helper(type, info){
     } 
     else {
       console.log('creating' + type);
+      if(type === 'project')
+        res.redirect('/projects/' + new_obj.id.toString());
     }
   });
 }
