@@ -329,6 +329,7 @@ select {
     font-size: 13px; }
 
 #chat {
+	color: rgb(186,190,180);
   font-size: 13px;
   background-color: transparent;
   border: none;
