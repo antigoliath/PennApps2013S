@@ -88,7 +88,7 @@ function update_hierarchy(project)
 		var x_dist = (world_paper.width/(_classes.length))*x
 
 		var box = org.Member.create({
-			rect: {x: x_dist, y: (world_paper.height/4)*depth+10*x, width: x_width, height: 60},
+			rect: {x: x_dist, y: (world_paper.height/5)*depth+6*x, width: x_width, height: 60},
 			name: _classes[x].name,
 			position: detail_string,
 			attrs: {fill : _fill, stroke:'white'}
