@@ -33,7 +33,7 @@
 			 project = data; 
 			 $("#current-project-id").text(project.id);
 			 console.log(project);
-			 socket.emit('openProject',project.id);
+       socket.emit('openProject',{ project_id: project.id });
 		  }
 		  });
 		  detailListeners();

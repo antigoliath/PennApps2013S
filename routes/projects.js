@@ -6,6 +6,7 @@ var _ = require('underscore');
 var ObjectId = mongoose.Types.ObjectId;
 var sio;
 
+var clients = {};
 
 exports.start_sockets = function(server){
   sio = io.listen(server);
@@ -20,6 +21,14 @@ exports.start_sockets = function(server){
   });
   sio.sockets.on('connection', function (client) {
     console.log('connected bro');
+
+    client.on('openProject', function(data){
+      clients[data.project_id] = clients[data.project_id] || [] ;
+      clients[data.project_id].push(client);
+      console.log('hi');
+      console.log(clients);
+    });
+
     client.on('saveAction', function(data){
       console.log('inside socket save action');
       console.log(data);
@@ -188,7 +197,7 @@ exports.view_json = function(req, res) {
 
 
 
-}
+};
 
 exports.view = function(req, res) {
   var proj_id = req.params.id;
@@ -283,8 +292,6 @@ exports.view = function(req, res) {
 
       }
     }); 
-
-
 };
 
 function show_json(type, res) {
@@ -361,19 +368,20 @@ function saveActionHelper(info, res){
 
   switch(info.action)
   {
-    case 'add': create_helper(info.type, info.info, res);
+    case 'add': create_helper(info.type, info, res);
                 break;
-    case 'modify': change_helper(info.type, info.info, 'modify');
+    case 'modify': change_helper(info.type, info, 'modify');
                    break;
-    case 'delete': change_helper(info.type, info.info, 'delete');
+    case 'delete': change_helper(info.type, info, 'delete');
                    break;
     case 'lock': break; // doesn't do anything atm
     case 'unlock': break;
   }
 }
 
-function create_helper(type, info, res){
+function create_helper(type, obj, res){
   var new_obj;
+  var info = obj.info;
   var hex_string = info.project || info.parent;
   // create from hexstring
   if(hex_string) hex_string = ObjectId.fromString(hex_string);
@@ -398,6 +406,13 @@ function create_helper(type, info, res){
       console.log('creating' + type);
       if(type === 'project')
         res.redirect('/projects/' + new_obj.id.toString());
+      else {
+        // re create obj, add ID
+        obj.info.id = new_obj.id.toString();
+        for(var index in clients[obj.project_id]) {
+          clients[obj.project_id][index].emit('update', obj);
+        }
+      }
     }
   });
 }
