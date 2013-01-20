@@ -65,7 +65,9 @@ exports.view_json = function(req, res) {
               console.log(interface_result);
             if(interface_result.length > 0) {
               // convert from mongodbobject to js object
-              _.each(interface_result, function(interface_item){
+              for(var index in interface_result){
+                var interface_item = interface_result[index];
+              // _.each(interface_result, function(interface_item){
                 console.log('over here')
                 console.log(interface_item)
                 interface_item = interface_item.toObject();
@@ -80,12 +82,15 @@ exports.view_json = function(req, res) {
                     return;     
                   } 
                   else {
-                    _.each(method_result, function(method_item){
+                    for(var index2 in method_result){
+                      var method_item = method_result[index2];
+                    // _.each(method_result, function(method_item){
                       method_item = method_item.toObject();
                       method_item.id = method_item._id;
                       interface_item.methods = interface_item.methods || [];
                       interface_item.methods.push(method_item);
-                    });
+                    }
+//);
 
 
 
@@ -97,7 +102,9 @@ exports.view_json = function(req, res) {
                         return;
                       } 
                       else {
-                        _.each(class_result, function(class_item){
+                        for(var index3 in class_result){
+                          var class_item = class_result[index3];
+                        // _.each(class_result, function(class_item){
 
                           // convert from mongodbobject to js object
                           class_item = class_item.toObject();
@@ -111,32 +118,41 @@ exports.view_json = function(req, res) {
                               return;     
                             } 
                             else {
-                              _.each(method_result, function(method_item){
+                              for(var index4 in method_result){
+                                var method_item = method_result[index4];
+                              // _.each(method_result, function(method_item){
                                 method_item = method_item.toObject();
                                 method_item.id = method_item._id;
                                 class_item.methods = class_item.methods || [];
                                 class_item.methods.push(method_item);
-                              });
+                              }
+// );
                               
 
                               // finally finished compiling entire json
                               console.log('finally finished compiling');
                               console.log("%j",project_result);
-                              res.json(project_result);
+                              console.log('finally finished compiling');
+                              console.log(res.headerSent);
+                              if(!res.headerSent)
+                                res.json(project_result);
+                              return;
 
 
 
                             }
                           });
                           project_result.classes.push(class_item);
-                        });
+                        }
+// );
                       }
                     });
 
                   }
                 });
                 project_result.interfaces.push(interface_item);
-              });
+              }
+// );
             }            
             else {
               models.Class.find({ project: project_result._id }, function(err, class_result){
@@ -147,7 +163,9 @@ exports.view_json = function(req, res) {
                 } 
                 else {
                   if(class_result.length > 0) {
-                    _.each(class_result, function(class_item){
+                    for(var index5 in class_result){
+                      var class_item = class_result[index5];
+                    // _.each(class_result, function(class_item){
                       // convert from mongodbobject to js object
                       class_item = class_item.toObject();
                       class_item.id = class_item._id.toString();
@@ -160,29 +178,38 @@ exports.view_json = function(req, res) {
                           return;     
                         } 
                         else {
-                          _.each(method_result, function(method_item){
+                          for(var index6 in method_result){
+console.log('HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIRRRRRRRRRRRRRRRRRRR');
+                            var method_item = method_result[index6];
+                          // _.each(method_result, function(method_item){
                             method_item = method_item.toObject();
                             method_item.id = method_item._id;
                             class_item.methods = class_item.methods || [];
                             class_item.methods.push(method_item);
-                          });
+                          }
+// );
                           
 
                           // finally finished compiling entire json
                           console.log('finally finished compiling');
                           console.log("%j",project_result);
-                          res.json(project_result);
+                          if(!res.headerSent)
+                            res.json(project_result);
+                          return;
 
 
 
                         }
                       });
                       project_result.classes.push(class_item);
-                    });
+                    }
+// );
                   }
                   else {
                     // else no classes, no interfaces, render json
-                    res.json(project_result);
+                    if(!res.headerSent)
+                      res.json(project_result);
+                    return;
 
                   }
                 }
@@ -193,10 +220,6 @@ exports.view_json = function(req, res) {
 
       }
     }); 
-
-
-
-
 };
 
 exports.view = function(req, res) {
@@ -222,7 +245,9 @@ exports.view = function(req, res) {
           } 
           else {
             // convert from mongodbobject to js object
-            _.each(interface_result, function(interface_item){
+            for(var index7 in interface_result){
+              var interface_item = interface_result[index7];
+            // _.each(interface_result, function(interface_item){
               console.log('over here')
               console.log(interface_item)
               interface_item = interface_item.toObject();
@@ -237,16 +262,20 @@ exports.view = function(req, res) {
                   return;     
                 } 
                 else {
-                  _.each(method_result, function(method_item){
+                  for(var index10 in method_result){
+                    var method_item = method_result[index10];
+                  // _.each(method_result, function(method_item){
                     method_item = method_item.toObject();
                     method_item.id = method_item._id;
                     interface_item.methods = interface_item.methods || [];
                     interface_item.methods.push(method_item);
-                  });
+                  }
+// );
                 }
               });
               project_result.interfaces.push(interface_item);
-            });
+            }
+// );
             
                 
             models.Class.find({ project: project_result._id }, function(err, class_result){
@@ -256,7 +285,9 @@ exports.view = function(req, res) {
                 return;
               } 
               else {
-                _.each(class_result, function(class_item){
+                for(var index12 in class_result){
+                  var class_item = class_result[index12];
+                // _.each(class_result, function(class_item){
 
                   // convert from mongodbobject to js object
                   class_item = class_item.toObject();
@@ -270,17 +301,21 @@ exports.view = function(req, res) {
                       return;     
                     } 
                     else {
-                      _.each(method_result, function(method_item){
+                      for(var index15 in method_result){
+                        var method_item = method_result[index15];
+                      // _.each(method_result, function(method_item){
                         method_item = method_item.toObject();
                         method_item.id = method_item._id;
                         class_item.methods = class_item.methods || [];
                         class_item.methods.push(method_item);
                         console.log('IM IN HEREREEEEEE')
-                      });
+                      }
+// );
                     }
                   });
                   project_result.classes.push(class_item);
-                });
+                }
+// );
                 // finally finished compiling entire json
                 console.log('finally finished compiling');
                 console.log("%j",project_result);
@@ -309,7 +344,9 @@ function show_json(type, res) {
   }
   model.find().exec(
     function (err, results) {
-      res.json(results);
+
+      if(!res.headerSent)
+        res.json(results);
     } 
   );
 }
@@ -382,12 +419,20 @@ function saveActionHelper(info, res){
 function create_helper(type, obj, res){
   var new_obj;
   var info = obj.info;
-  var hex_string = info.project || info.parent;
-  // create from hexstring
-  if(hex_string) hex_string = ObjectId.fromString(hex_string);
+  //will not have info if creating project
+  if(info){
+    var hex_string = info.project || info.parent;
+    // create from hexstring
+    if(hex_string) hex_string = ObjectId.fromString(hex_string);
+
+  } else info = obj;
   switch(type)
   {
-    case 'project': new_obj = new models.Project(info);
+    case 'project': info.classes = info.classes || [];
+                    info.interfaces = info.interfaces || [];
+                    console.log('INSDIE');
+                    console.log(info);
+                    new_obj = new models.Project(info);
                     break;
     case 'method': new_obj = new models.Method(info);
                     break;
@@ -396,6 +441,7 @@ function create_helper(type, obj, res){
     case 'class': new_obj = new models.Class(info);
                     break;
   }
+
   new_obj.save(function(err){
     if(err) {
       console.log('ERROR: creating ' + type + ' failed');
@@ -417,8 +463,9 @@ function create_helper(type, obj, res){
   });
 }
 
-function change_helper(type, info, change_type){
+function change_helper(type, obj, change_type){
   var mod_obj;
+  var info = obj.info;
   var model; 
   // create from hexstring
   var hex_string = info.project || info.parent;
@@ -448,6 +495,10 @@ function change_helper(type, info, change_type){
           else {
             console.log(mod_obj);
             console.log('modifying' + type);
+            // re create obj, add ID
+            for(var index in clients[obj.project_id]) {
+              clients[obj.project_id][index].emit('update', obj);
+            }
           }
         });
   }
