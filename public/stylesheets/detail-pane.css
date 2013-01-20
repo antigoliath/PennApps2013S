@@ -259,3 +259,31 @@
 	clear: none;
 	padding-top: 3px;
 }
+
+
+
+
+/* chat */
+
+#chatbox {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 800px;
+  max-height: 200px; }
+
+#messages {
+  color: white; }
+  #messages p {
+    margin: 5px 0 5px 0;
+    font-size: 13px; }
+
+#chat {
+  font-size: 13px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 5px;
+  width: 100%; }
+

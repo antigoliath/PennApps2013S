@@ -34,6 +34,14 @@ exports.start_sockets = function(server){
       console.log(data);
       saveActionHelper(data);
     });
+
+    client.on('chat', function(data){
+      // should check for server validation here
+      console.log(data.message);
+      console.log(data.username);
+      sio.sockets.emit('chat', data);
+    });
+
   });
 };
 
