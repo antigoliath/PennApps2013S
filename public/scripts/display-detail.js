@@ -2,6 +2,8 @@ function loadProjectDetail() {
 	$("#current-project-id").text(project.id);
 	$(".project-info .title").text(project.name);
 	$(".project-info .description").text(project.description);
+	$(".add-attributes").css("display", "none")
+	$(".add-methods").css("display", "none")
 	update_hierarchy(project);
 }
 
@@ -35,6 +37,8 @@ function loadObjectDetail(the_obj) {
 		resetAddAttribute();  
 		resetAddMethod();
 		$(".edit-object").show();
+		$(".add-attributes").css("display", "inline")
+		$(".add-methods").css("display", "inline")
 }
 
 function loadObjInfoDetail(the_obj) {

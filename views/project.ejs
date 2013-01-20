@@ -102,12 +102,18 @@
 			<div class="project-info">
 				<div class="project_title">Project Title</div>
 				<div class="description">Description of project...</div>
+				<label>Language: </label>
+					<select id="language" onchange='changeLanguage()'>
+					<option value="java">Java</option>
+					<option value="ruby">Ruby</option>
+					<option value="python">Python</option>
+					</select>
 				<div class="back">Back</div>
 			</div>
 			<div class="add-controls">
 				<div class="add-class">Add a Class</div>
-				<div class="add-attributes">Add Attributes</div>
-				<div class="add-methods">Add Methods</div>
+				<div class="add-attributes" style="display:none">Add Attributes</div>
+				<div class="add-methods" style="display:none">Add Methods</div>
 			</div>
 			<div id="detail-hidden-info">
 				<div id="current-project-id"></div>
@@ -122,7 +128,7 @@
 							<option selected="selected" value='class'>Class</option>
 							<option value='interface'>Interface</option>
 						</select>
-						<textarea id="class-description-textbox">Description of MyClass</textarea>
+						<textarea id="class-description-textbox" placeholder="Description of my Class"></textarea>
 						<div id="create-class">Create Class</div>
 					</div>
 				</div>
@@ -204,11 +210,6 @@
 		<div class="visualizer-panel">
 			<div class="the-code" id="canvas"></div>
 			<div class="warnings-panel"></div>
-			<select id="language" onchange='changeLanguage()'>
-				<option value="java">Java</option>
-				<option value="ruby">Ruby</option>
-				<option value="python">Python</option>
-			</select>
 		</div>
     </div>
   </body>

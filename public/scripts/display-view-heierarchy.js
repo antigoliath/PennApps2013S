@@ -49,11 +49,11 @@ function update_hierarchy(project)
 					if(_classes[_cl].name == temp.parents[par])
 					{
 						extensions.push([x, _cl])
+						temp = _classes[_cl]
 					}
 				}
 			}
 			depth += 1
-			temp = temp.parents[0]
 		}
 		var _fill = "red"
 
@@ -61,15 +61,15 @@ function update_hierarchy(project)
 		{
 			_fill = "orange"
 		}
-		else if(depth > 1)
+		if(depth > 1)
 		{
 			_fill = "yellow"
 		}
-		else if(depth > 2)
+		if(depth > 2)
 		{
 			_fill = "green"
 		}
-		else if(depth > 3)
+		if(depth > 3)
 		{
 			_fill = "blue"
 		}
@@ -80,25 +80,12 @@ function update_hierarchy(project)
 			x_width = world_paper.width/(_classes.length)
 		}
 		var x_dist = (world_paper.width/(_classes.length))*x
-		var looper = true
-		while(looper)
-		{
-			for(var number in x_dists)
-			{
-				if(Math.abs(x_dists[number] - x_dist) < 140)
-				{
-					x_dist = Math.random()*(world_paper.width-200)+50;
-					break;
-				}
-			}
-			looper = false
-		}
 
 		var box = org.Member.create({
-			rect: {x: x_dist, y: (world_paper.height/4)*depth, width: x_width, height: 60},
+			rect: {x: x_dist, y: (world_paper.height/3)*depth+10*x, width: x_width, height: 60},
 			name: _classes[x].name,
 			position: detail_string,
-			attrs: {fill : _fill, stroke:'gray'}
+			attrs: {fill : _fill, stroke:'white'}
 		});
 		x_dists.push(x_dist)
 
@@ -117,24 +104,25 @@ function update_hierarchy(project)
 		var tuple = extensions[conn]
 		boxes[tuple[0]].joint(boxes[tuple[1]], {
 			label: "extends",
+			color: "white",
 			beSmooth: "true",
 			startArrow: {
 				type: "none",
 				size: 7,
 				attrs: {
-					fill: "red",
-					stroke: "black"
+					fill: "green",
+					stroke: "white"
 				}
 			},
 			endArrow: {
 				type: "basic",
 				size: 7,
 				attrs: {
-					fill: "red",
-					stroke: "black"
+					fill: "green",
+					stroke: "white",
 				}
 			}
-		});
+		}).highlight("white");
 	}
 	for(var conn in implementations)
 	{
@@ -146,18 +134,18 @@ function update_hierarchy(project)
 				type: "none",
 				size: 7,
 				attrs: {
-					fill: "gray",
-					stroke: "blue"
+					fill: "white",
+					stroke: "black"
 				}
 			},
 			endArrow: {
 				type: "basic",
 				size: 7,
 				attrs: {
-					fill: "gray",
-					stroke: "blue"
+					fill: "white",
+					stroke: "black"
 				}
 			}
-		});
+		}).highlight("white");
 	}
 }

@@ -274,6 +274,7 @@ function classListeners() {
 				}
 				console.log(data);
 				saveAction(data);
+				update_hierarchy(project);
 				$(this).val("");
 		}
 	});

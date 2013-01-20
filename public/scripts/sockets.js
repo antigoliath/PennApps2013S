@@ -9,7 +9,6 @@ socket.on('add_method', function(data){
 });
 
 
-
 function saveAction(action_obj) {
   console.log(action_obj);
 	socket.emit('saveAction', action_obj);

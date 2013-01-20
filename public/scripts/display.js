@@ -28,7 +28,9 @@ function modifyClass(info_obj) {
 			loadObjInfoDetail(the_obj);
 		}
 		//Update the code view if necessary
-		update_codeview(the_obj, project.interfaces, "class")
+		if(the_obj.id == $("#current-object-id").text()) {
+			update_codeview(the_obj, project.interfaces, "class")
+		}
 		
 		//Update the heierachical view if necessary
 	}
