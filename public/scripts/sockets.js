@@ -1,5 +1,3 @@
-var socket = io.connect("/");
-
 function saveAction(action_obj) {
   console.log(action_obj);
 	socket.emit('saveAction', action_obj);
