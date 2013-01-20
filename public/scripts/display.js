@@ -65,6 +65,10 @@ function modifyInterface(info_obj) {
 			loadObjInfoDetail(the_obj);
 		}
 		//Update the code view if necessary
+		if($("#current-object-type").text() == "interface" && 
+		the_obj.id == $("#current-object-id").text()) {
+			update_codeview(the_obj, project.interfaces, "interface")
+		}
 		//Update the heierachical view if necessary
 	}
 }
@@ -120,6 +124,7 @@ function modifyMethod(info_obj) {
 				the_obj = the_class;
 			}
 		}
+		update_codeview(the_obj, project.interfaces, "class")
 	}
 	else {
 		for(var i in project.interfaces) {
@@ -138,6 +143,7 @@ function modifyMethod(info_obj) {
 				the_obj = the_interface;
 			}
 		}
+		update_codeview(the_obj, project.interfaces, "interface")
 	}
 	if(the_obj) {
 		if($("#current-object-id").text() == the_obj.id) {
@@ -160,6 +166,7 @@ function deleteMethod(info_obj) {
 				the_obj = the_class;
 			}
 		}
+		update_codeview(the_obj, project.interfaces, "interface")
 	}
 	else {
 		for(var i in project.interfaces) {
@@ -174,6 +181,7 @@ function deleteMethod(info_obj) {
 				the_obj = the_interface;
 			}
 		}
+		update_codeview(the_obj, project.interfaces, "class")
 	}
 	if(the_obj) {
 		if($("#current-object-id").text() == the_obj.id) {
