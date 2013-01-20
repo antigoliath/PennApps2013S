@@ -4,11 +4,17 @@
   src: url('../Fonts/ColabThi.otf');
 }
 
-body, textarea, input, button, select{
+body, textarea, input, select{
   font-family: col;
   color: #dde3e4
   
 }
+
+button{
+	font-family: col;
+	color: rgb(190,210,200);
+}
+
 textarea, input{
 
   color: black;
