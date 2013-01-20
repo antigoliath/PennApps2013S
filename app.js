@@ -59,7 +59,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-  mongoose.connect(app.settings.MONGOHQ_URL);
+  mongoose.connect('mongodb://heroku:30743994b81074e715477f301c02f573@penny.mongohq.com:10053/app11141866');
 });
 
 app.get('/', routes.index);
