@@ -2,7 +2,6 @@ var lang = "java"
 
 function update_codeview(_class, _interfaces, flag)
 {
-	alert(lang)
 	if(lang == "java")
 	{
 		var theskeleton = java_skeleton(_class, _interfaces, flag)
@@ -35,5 +34,6 @@ function update_codeview(_class, _interfaces, flag)
 function changeLanguage()
 {
 	lang = $('#language').val()
-	alert(lang)
+	var the_class = getInterClass($("#current-object-id").text(),$("#current-object-type").text());
+	update_codeview(the_class,project.interfaces,$("#current-object-type").text());
 }
