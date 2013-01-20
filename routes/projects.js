@@ -452,12 +452,16 @@ function create_helper(type, obj, res){
 
 function change_helper(type, obj, change_type){
   var mod_obj;
+  console.log(obj);
+  console.log('hihi');
   var info = obj.info;
   var model; 
   // create from hexstring
-  var hex_string = info.project || info.parent;
-  // create from hexstring
-  if(hex_string) hex_string = ObjectId.fromString(hex_string);
+  if(info) {
+    var hex_string = info.project || info.parent;
+    // create from hexstring
+    if(hex_string) hex_string = ObjectId.fromString(hex_string);
+  }
 
   switch(type)
   {
@@ -491,6 +495,7 @@ function change_helper(type, obj, change_type){
         });
   }
   else if(change_type === 'delete') {
+    console.log(info)
     model.findByIdAndRemove(info.id, {}, function(err, product){
       if(err) {
         console.log('ERROR: removing ' + type + 'failed.');
