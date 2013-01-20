@@ -1,5 +1,6 @@
 function java_skeleton(_class, _interfaces, flag)
 {
+	alert(_class.id)
 	var class_string = ""
 	var _warnings = []
 

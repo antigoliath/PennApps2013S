@@ -4,7 +4,7 @@ var project = {
 	description : "It's a frickin awesome project",
 	classes : [
 	{
-		id : "1",
+		id : "2",
 		name : "Comment",
 		project : "1",
 		description : "It's a class for comments",
@@ -29,6 +29,16 @@ var project = {
 			]
 		}
 		]
+	},
+	{
+		id: "4",
+		name: "Hello World",
+		project: "1",
+		description: "hi",
+		parents: ["Comment"],
+		interfaces: ["Commentable"],
+		attributes : [],
+		methods : []
 	}
 	],
 	interfaces : [
