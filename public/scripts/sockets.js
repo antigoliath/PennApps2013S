@@ -2,7 +2,7 @@ var socket = io.connect("/");
 
 socket.on('update', function(data){
   console.log(data);
-})
+});
 
 function saveAction(action_obj) {
   console.log(action_obj);
