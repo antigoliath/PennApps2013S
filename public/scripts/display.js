@@ -1,5 +1,6 @@
 function addClass(info_obj) {
-	
+	project.classes.push(info_obj);
+	loadClassDetail(info_obj.id);
 }
 function modifyClass(info_obj) {
 	//Update the project object
@@ -32,7 +33,8 @@ function deleteClass(info_obj) {
 }
 
 function addInterface(info_obj) {
-	
+	project.interfaces.push(info_obj);
+	loadInterfaceDetail(info_obj.id);
 }
 function modifyInterface(info_obj) {
 	//Update the project object

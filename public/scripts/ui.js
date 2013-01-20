@@ -24,13 +24,13 @@ function detailListeners() {
 }
 
 function resetAddClass() {
-	var the_class = {name : "", description : ""}
+	var the_class = {name : "", description : "", parents : [], attributes : [], interfaces : []}
 	$("#class-name-textbox").val("");
 	$("#class-description-textbox").val("Description of MyClass");
 	$("#create-class").unbind("click");
 	$("#create-class").click(function() {
 		the_class.name = $("#class-name-textbox").val();
-		the_class.description = $("#class-description-texbox").val();
+		the_class.description = $("#class-description-textbox").val();
 		the_class.project = $("#current-project-id").text();
 		var data = {
 			action : "add",

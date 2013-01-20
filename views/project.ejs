@@ -21,11 +21,23 @@
   </head>
   <body>
 	  <script type='text/javascript'>
-      var project_id = '<%= project_id %>';
+		  var socket = io.connect("/");
+		  var project = null;
 	  $(document).ready(function() {
+		  
+		  var project_id = '<%= project_id %>';
+		  $.ajax({
+		  method : "GET",
+		  url : "/projects/"+project_id+".json",
+		  success : function(data) {
+			 project = data; 
+			 $("#current-project-id").text(project.id);
+			 console.log(project);
+			 socket.emit('openProject',project.id);
+		  }
+		  });
 		  detailListeners();
-		  loadInterfaceDetail(1);
-		  loadClassDetail(1);
+		  $(".edit-object").hide();
 	  });
 	  </script>
     <div id="project-IDGOESHERE" class="project">
