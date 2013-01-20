@@ -36,6 +36,9 @@ var settings =
     cookie_secret: "COOKIE SECRET"
   };
 
+
+mongoose.connect(process.env.MONGOLAB_URI );
+
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -55,8 +58,6 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
 });
-
-mongoose.connect(process.env.MONGOLAB_URI );
 
 app.get('/', routes.index);
 app.get('/test', test.test);
