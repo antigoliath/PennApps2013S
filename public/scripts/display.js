@@ -1,4 +1,10 @@
 function addClass(info_obj) {
+	if(!info_obj.attributes) {
+		info_obj.attributes = [];
+	}
+	if(!info_obj.methods) {
+		info_obj.methods = [];
+	}
 	project.classes.push(info_obj);
 	loadClassDetail(info_obj.id);
 }
@@ -18,8 +24,7 @@ function modifyClass(info_obj) {
 		}
 	if(the_obj) {
 		//Update the detail panel if necessary
-		if($("#current-object-type").text() == "class" && 
-		the_obj.id == $("#current-object-id").text()) {
+		if(the_obj.id == $("#current-object-id").text()) {
 			loadObjInfoDetail(the_obj);
 		}
 		//Update the code view if necessary

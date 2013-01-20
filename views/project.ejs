@@ -21,7 +21,6 @@
   </head>
   <body>
 	  <script type='text/javascript'>
-		  var socket = io.connect("/");
 		  var project = null;
 	  $(document).ready(function() {
 		  
@@ -33,7 +32,7 @@
 			 project = data; 
 			 $("#current-project-id").text(project.id);
 			 console.log(project);
-       socket.emit('openProject',{ project_id: project.id });
+			 socket.emit('openProject',{ project_id: project.id });
 		  }
 		  });
 		  detailListeners();

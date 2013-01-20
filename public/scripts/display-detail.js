@@ -2,6 +2,7 @@ function loadClassDetail(class_id) {
 	for(var i in project.classes) {
 		if(project.classes[i].id == class_id) {
 			var the_class = project.classes[i];
+			console.log(the_class);
 			$("#current-object-type").text("class");
 			$("#current-object-id").text(the_class.id);
 			loadObjectDetail(the_class);
