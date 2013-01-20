@@ -41,7 +41,7 @@ function loadObjInfoDetail(the_obj) {
 				'<div class="vital-info">'+
 					'<div class="scope">'+the_attr.scope+'</div>'+
 					'<div class="name"><span>'+the_attr.name+'</span></div>'+
-					'<div class="type">'+the_attr.type+'</div>'+
+					'<div class="type">'+the_attr.attr_type+'</div>'+
 					'<div id="delete-attribute-'+the_attr.name+'" class="delete">Delete</div>'+
 				'</div>'+
 				'<div class="description">'+the_attr.description+'</div>'+
@@ -73,7 +73,7 @@ function loadMethodsDetail(the_obj) {
 					args.append('<div class="argument">'+
 					'<div class="vital-info">'+
 						'<div class="name"><span>'+the_arg.name+'</span></div>'+
-						'<div class="type">'+the_arg.type+'</div>'+
+						'<div class="type">'+the_arg.attr_type+'</div>'+
 						'<div class="description">'+the_arg.description+'</div>'+
 						'<div id="delete-argument-'+the_arg.name+'" class="delete">Delete</div>'+
 					'</div>'+

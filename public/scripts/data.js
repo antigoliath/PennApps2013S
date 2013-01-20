@@ -11,8 +11,8 @@ var project = {
 		parent : "DBObj",
 		interfaces : ["Commentable","Likeable"],
 		attributes : [
-		{scope : "private", name : "id", type : "int", description : "The DB id."},
-		{scope : "private", name : "comment", type : "string", description : "The comment"}
+		{scope : "private", name : "id", attr_type : "int", description : "The DB id."},
+		{scope : "private", name : "comment", attr_type : "string", description : "The comment"}
 		],
 		methods : [
 		{
@@ -24,8 +24,8 @@ var project = {
 			parent_type : "class",
 			ret : "void",
 			args : [
-			{name : "user", type : "User", description : "The user liking it"},
-			{name : "timestamp", type : "long", description : "The UNIX timestamp"}
+			{name : "user", attr_type : "User", description : "The user liking it"},
+			{name : "timestamp", attr_type : "long", description : "The UNIX timestamp"}
 			]
 		}
 		]
@@ -38,8 +38,8 @@ var project = {
 		project : "1",
 		description : "Interface for things that are commentable",
 		attributes : [
-		{scope : "private", name : "other_id", type : "int", description : "The other id."},
-		{scope : "private", name : "details", type : "string", description : "Some details."}
+		{scope : "private", name : "other_id", attr_type : "int", description : "The other id."},
+		{scope : "private", name : "details", attr_type : "string", description : "Some details."}
 		],
 		methods : [
 		{
@@ -50,8 +50,8 @@ var project = {
 			parent_type : "interface",
 			ret : "boolean",
 			args : [
-			{name : "comment", type : "string", description : "The comment to add"},
-			{name : "user", type : "User", description : "The user commenting."}
+			{name : "comment", attr_type : "string", description : "The comment to add"},
+			{name : "user", attr_type : "User", description : "The user commenting."}
 			]
 		}
 		]

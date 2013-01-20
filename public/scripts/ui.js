@@ -1,5 +1,5 @@
 function resetAddAttribute() {
-	var the_attribute = {name : "", type : "", description : ""};
+	var the_attribute = {name : "", attr_type : "", description : ""};
 	$('.attribute-prompt').html("Enter an attribute name <span>Press enter to continue</span>");
 	$('.attribute-preview').html("");
 	$("#add-attribute .form-state").text("0");
@@ -19,8 +19,8 @@ function resetAddAttribute() {
 				break;
 			case "1":
 				$('.attribute-prompt').html("Enter the attribute's description <span>Press enter to continue, esc to cancel</span>");
-				the_attribute.type = $("#attribute-textbox").val();
-				$('.attribute-preview').append(the_attribute.type);
+				the_attribute.attr_type = $("#attribute-textbox").val();
+				$('.attribute-preview').append(the_attribute.attr_type);
 				$("#add-attribute .form-state").text("2");
 				$("#attribute-textbox").val("");
 				break;
@@ -49,7 +49,7 @@ function resetAddAttribute() {
 }
 
 function resetAddArgument(the_method) {
-	var the_argument = {name : "", type : "", description : ""};
+	var the_argument = {name : "", attr_type : "", description : ""};
 	the_method.find('.argument-prompt').html("Enter an argument name <span>Press enter to continue</span>");
 	the_method.find('.argument-preview').html("");
 	the_method.find(".add-argument .form-state").text("0");
@@ -69,8 +69,8 @@ function resetAddArgument(the_method) {
 				break;
 			case "1":
 				the_method.find('.argument-prompt').html("Enter the argument's description <span>Press enter to continue, esc to cancel</span>");
-				the_argument.type = the_method.find(".argument-textbox").val();
-				the_method.find('.argument-preview').append(the_argument.type);
+				the_argument.attr_type = the_method.find(".argument-textbox").val();
+				the_method.find('.argument-preview').append(the_argument.attr_type);
 				the_method.find(".add-argument .form-state").text("2");
 				the_method.find(".argument-textbox").val("");
 				break;
@@ -383,7 +383,7 @@ function methodListeners() {
 						for(var j in modified_method.args) {
 							if(modified_method.args[j].name == _name) {
 								modified_method.args[j].name = n_name;
-								modified_method.args[j].type = n_type;
+								modified_method.args[j].attr_type = n_type;
 								modified_method.args[j].description = n_desc;
 							}
 						}
