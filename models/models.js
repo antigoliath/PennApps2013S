@@ -19,7 +19,7 @@ var Class = new mongoose.Schema({
     { 
       name: String,
       scope: String,
-      type: String,
+      attr_type: String,
       description: String
     }
   ]
@@ -35,7 +35,7 @@ var Interface = new mongoose.Schema({
     { 
       name: String,
       scope: String,
-      type: String,
+      attr_type: String,
       description: String
     }
   ]
@@ -53,7 +53,7 @@ var Method = new mongoose.Schema({
   args: [
     {
       name: String,
-      type: String,
+      attr_type: String,
       description: String
     }
   ]
