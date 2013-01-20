@@ -15,10 +15,6 @@ function python_skeleton(_class, _interfaces)
 	//get parent info if exists
 	var parent = _class.parents
 	var parname = ""
-	if (parent)
-	{
-		var parname = " extends " + parent.join(", ")
-	}
 
 	//get interfaces info if exists
 	var interfaces = _class.interfaces
@@ -45,11 +41,10 @@ function python_skeleton(_class, _interfaces)
 			}
 		}
 	}
-	console.log(parent)
 
 	//build the parents array before creating string in ruby,
 	//treating interfaces like parents because there are no interfaces
-	if (parent)
+	if (parent[0])
 	{
 		var parname = " extends " + parent.join(", ")
 	}

@@ -6,7 +6,6 @@ function addClass(info_obj) {
 		info_obj.methods = [];
 	}
 	project.classes.push(info_obj);
-	loadClassDetail(info_obj.id);
 	update_hierarchy(project);
 }
 function modifyClass(info_obj) {
@@ -41,6 +40,7 @@ function deleteClass(info_obj) {
 function addInterface(info_obj) {
 	project.interfaces.push(info_obj);
 	loadInterfaceDetail(info_obj.id);
+	update_hierarchy(project);
 }
 function modifyInterface(info_obj) {
 	//Update the project object

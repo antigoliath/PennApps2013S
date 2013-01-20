@@ -2,6 +2,7 @@ function loadProjectDetail() {
 	$("#current-project-id").text(project.id);
 	$(".project-info .title").text(project.name);
 	$(".project-info .description").text(project.description);
+	update_hierarchy(project);
 }
 
 function loadClassDetail(class_id) {
@@ -25,7 +26,7 @@ function loadInterfaceDetail(interface_id) {
 			loadObjectDetail(the_interface);
 		}
 	}
-	
+	update_codeview(the_interface, project.interfaces, "class", "java")
 }
 
 function loadObjectDetail(the_obj) {
