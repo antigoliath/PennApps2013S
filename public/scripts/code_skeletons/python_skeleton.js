@@ -100,6 +100,6 @@ function python_constructor(attr)
 			initialize_string.push("self"+"."+attr[xy].name+" = "+attr[xy].name)
 		}
 	}
-	return "def __init__(" + arguments.join(", ") + ")\n\t\t#Constructor\n\t\t" +
+	return "def __init__(" + arguments.join(", ") + ")\n\t\t\"\"\"Constructor\"\"\"\n\t\t" +
 		initialize_string.join("\n\t\t") + "\n\n"
 }

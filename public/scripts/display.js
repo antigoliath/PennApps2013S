@@ -7,6 +7,7 @@ function addClass(info_obj) {
 	}
 	project.classes.push(info_obj);
 	loadClassDetail(info_obj.id);
+	update_hierarchy(project);
 }
 function modifyClass(info_obj) {
 	//Update the project object

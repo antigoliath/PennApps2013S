@@ -4,7 +4,6 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/detail-pane.css' />
-    <link rel='stylesheet' href='/stylesheets/code-view.css' />
     <link rel='stylesheet' href='/stylesheets/solarized_dark.css'/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -13,6 +12,7 @@
     <script src="/scripts/display.js"></script>
     <script src="/scripts/display-detail.js"></script>
     <script src="/scripts/sockets.js"></script>
+    <script src="/scripts/display-view-heierarchy.js"></script>
     <script src="/scripts/code_skeletons/java_skeleton.js"></script>
     <script src="/scripts/code_skeletons/ruby_skeleton.js"></script>
     <script src="/scripts/code_skeletons/python_skeleton.js"></script>
@@ -159,18 +159,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="visualizer-panel">
+		<div class="visualizer-panel" id="canvas">
 			<div class="code-view">
 				<div class="the-code"></div>
-				<div class="warnings-panel">
-					
+				<div class="warnings-panel"></div>
 				<select id="language" onchange='changeLanguage()'>
 					<option value="java">Java</option>
 					<option value="ruby">Ruby</option>
 					<option value="python">Python</option>
 				</select>
 					Warnings:
-					</div>
+			</div>
 			</div>
 			<div class="hierarchical-view"></div>
 		</div>
