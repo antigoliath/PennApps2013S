@@ -22,15 +22,28 @@
   <body>
 	  <script type='text/javascript'>
 		  var project = null;
+		  var tmp_methods = [];
 	  $(document).ready(function() {
-		  
+		  socket.on('add_method', function(data){
+  tmp_methods.push(data);
+});
+
 		  var project_id = '<%= project_id %>';
 		  $.ajax({
 		  method : "GET",
 		  url : "/projects/"+project_id+".json",
 		  success : function(data) {
 			 project = data; 
-			 $("#current-project-id").text(project.id);
+			 for(var i in project.classes) {
+				 project.classes[i].methods = [];
+			 }
+			 for(var i in project.interfaces) {
+				 project.interfaces[i].methods = [];
+			 }
+			 loadProjectDetail();
+			 for(var i in tmp_methods) {
+				 processAction({ action : "add", type :"method",tmp_methods[i] });
+			 }
 			 console.log(project);
 			 socket.emit('openProject',{ project_id: project.id });
 		  }
@@ -42,24 +55,19 @@
     <div id="project-IDGOESHERE" class="project">
 		<div class="detail-panel">
 			<div class="project-info">
+				<div class="title">Project Title</div>
+				<div class="description">Description of project...</div>
 				<div class="back">Back</div>
+				
 			</div>
 			<div class="add-controls">
 				<div class="add-class">Add a Class</div>
 				<div class="add-attributes">Add Attributes</div>
 				<div class="add-methods">Add Methods</div>
 			</div>
-			<form>
-				<label>Select a language:</label>
-				<select id="language" onchange='changeLanguage()'>
-					<option value="java">Java</option>
-					<option value="ruby">Ruby</option>
-					<option value="python">Python</option>
-				</select>
-			</form>
 			<div id="detail-hidden-info">
 				<div id="current-project-id"></div>
-				<div id="current-object-id">1</div>
+				<div id="current-object-id"></div>
 				<div id="current-object-type">class</div>
 			</div>
 			<div class="add-object">
@@ -152,7 +160,15 @@
 		<div class="visualizer-panel">
 			<div class="code-view">
 				<div class="the-code"></div>
-				<div class="warnings-panel">Warnings:</div>
+				<div class="warnings-panel">
+					
+				<select id="language" onchange='changeLanguage()'>
+					<option value="java">Java</option>
+					<option value="ruby">Ruby</option>
+					<option value="python">Python</option>
+				</select>
+					Warnings:
+					</div>
 			</div>
 			<div class="hierarchical-view"></div>
 		</div>
