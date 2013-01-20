@@ -1,10 +1,14 @@
 var socket = io.connect("/");
 
+socket.on('update', function(data){
+  console.log(data);
+	processAction(data);
+});
+
 function saveAction(action_obj) {
   console.log(action_obj);
 	socket.emit('saveAction', action_obj);
   console.log('save action done');
-	processAction(action_obj);
 }
 function processAction(action_obj) {
 	switch(action_obj.type) {
