@@ -21,6 +21,7 @@
     <script src="/scripts/highlight.pack.js"></script>
   </head>
   <body>
+    <input id="chat-username" placeholder="Chat Username"/>
     <div id="chatbox"> 
       <div id="messages">
         <p> <span class="user">AnonymousUser0000</span>: <span class="message">:D </span> </p>
@@ -74,6 +75,14 @@
           message: message
         });
       }
+
+      // chat username
+      $('#chat-username').keypress(function(keycode){
+        if(keycode.keyCode === 13){
+          me = $('#chat-username').val();
+          $('#chat-username').val('');
+        }
+      });
 
       socket.on('chat', function(data){
         var new_msg = $('#messages p').first().clone();
