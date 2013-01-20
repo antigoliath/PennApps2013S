@@ -33,7 +33,16 @@ function loadObjInfoDetail(the_obj) {
 			edit_obj.attr("id","edit-object-"+the_obj.id);
 			edit_obj.find(".info .name").html("<span>"+the_obj.name+"</span>");
 			edit_obj.find(".info .description").text(the_obj.description);
-			
+			var rels = edit_obj.find(".info .relations");
+			rels.html("");
+			for(var i in the_obj.parents) {
+				rels.append('<div class="parent">'+the_obj.parents[i]+'</div>');
+			}
+			for(var i in the_obj.interfaces) {
+				rels.append('<div class="interface">'+the_obj.interfaces[i]+'</div>');
+			}
+			rels.append('<input class="add-parent" type="text" placeholder="ParentClass"/>');
+			rels.append('<input class="add-interface" type="text" placeholder="MyInterface"/>');
 			var attrs = edit_obj.find(".attributes");
 			attrs.html("<h3>Attributes</h3");
 			for(var j in the_obj.attributes) {
