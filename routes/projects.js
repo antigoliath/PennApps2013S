@@ -293,7 +293,7 @@ exports.view = function(req, res) {
                 // finally finished compiling entire json
                 console.log('finally finished compiling');
                 console.log("%j",project_result);
-                res.render('project', { title: 'Projects', project_id: project_result.id});
+                res.render('project', { description: project_result.description, name: project_result.name, project_id: project_result.id});
               }
             });
           }
