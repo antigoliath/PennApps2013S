@@ -274,7 +274,10 @@
   max-height: 200px; }
 
 #messages {
-  color: white; }
+  color: white; 
+  max-height: 160px;
+  overflow:scroll;
+}
   #messages p {
     margin: 5px 0 5px 0;
     font-size: 13px; }
@@ -285,5 +288,8 @@
   border: none;
   box-shadow: none;
   padding: 5px;
-  width: 100%; }
+  width: 100%; 
+  overflow:hidden;
+  max-height: 200px;
+}
 

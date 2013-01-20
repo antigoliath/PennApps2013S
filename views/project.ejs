@@ -80,6 +80,7 @@
         new_msg.find('.user').text(data.username);
         new_msg.find('.message').text(data.message);
         new_msg.appendTo('#messages');
+        $('#messages').stop().animate({scrollTop: $('#messages').prop('scrollHeight')});
       });
 
       
