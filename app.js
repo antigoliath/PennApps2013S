@@ -55,7 +55,7 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
-  mongoose.connect(app.settings.MONGOHQ_URL);
+  mongoose.connect(process.env.MONGOLAB_URI);
 });
 
 app.get('/', routes.index);
