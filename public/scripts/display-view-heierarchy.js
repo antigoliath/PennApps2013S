@@ -40,6 +40,8 @@ function update_hierarchy(project)
 			}
 		}
 
+		var found = false
+
 		while(temp.parents && temp.parents[0])
 		{
 			for(var par in temp.parents)
@@ -48,7 +50,11 @@ function update_hierarchy(project)
 				{
 					if(_classes[_cl].name == temp.parents[par])
 					{
-						extensions.push([x, _cl])
+						if(!found)
+						{
+							extensions.push([x, _cl])
+							found = true
+						}
 						temp = _classes[_cl]
 					}
 				}
@@ -103,9 +109,6 @@ function update_hierarchy(project)
 		var tuple = extensions[conn]
 		boxes[tuple[0]].joint(boxes[tuple[1]], {
 			label: "extends",
-			labelAttrs: {
-				position: 0
-			},
 			color: "white",
 			beSmooth: "true",
 			startArrow: {
@@ -131,9 +134,6 @@ function update_hierarchy(project)
 		var tuple = implementations[conn]
 		boxes[tuple[0]].joint(boxes[tuple[1]], {
 			label: "implements",
-			labelAttrs: {
-				position: 0
-			},
 			beSmooth: "true",
 			startArrow: {
 				type: "none",
