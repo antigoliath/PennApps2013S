@@ -58,8 +58,8 @@
 			 console.log(project);
 			 socket.emit('openProject',{ project_id: project.id });
 		  }
-		  			 loadProjectDetail();
 		  });
+		  loadProjectDetail();
 		  detailListeners();
 		  $(".edit-object").hide();
       /* chat */
