@@ -4,6 +4,11 @@ socket.on('update', function(data){
   console.log(data);
 	processAction(data);
 });
+socket.on('add_method', function(data){
+  tmp_methods.push(data);
+});
+
+
 
 function saveAction(action_obj) {
   console.log(action_obj);

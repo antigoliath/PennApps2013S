@@ -71,6 +71,7 @@ app.get('/projects/:id', projects.view);
 app.get('/users', user.list);
 app.get('/projects.json', projects.project_json);
 app.get('/classes.json', projects.class_json);
+app.get('/methods/:id.json', projects.project_methods);
 app.get('/methods.json', projects.method_json);
 app.get('/interfaces.json', projects.interface_json);
 app.post('/projects/new', projects.create_project);

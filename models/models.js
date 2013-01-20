@@ -53,6 +53,7 @@ var Method = new mongoose.Schema({
   scope: String,
   parent: ObjectId,
   parent_type: String, //class or interface
+  project: ObjectId,
   ret: String,
   args: [
     {

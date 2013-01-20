@@ -24,25 +24,23 @@
 		  var project = null;
 		  var tmp_methods = [];
 	  $(document).ready(function() {
-		  socket.on('add_method', function(data){
-  tmp_methods.push(data);
-});
-
 		  var project_id = '<%= project_id %>';
 		  $.ajax({
 		  method : "GET",
 		  url : "/projects/"+project_id+".json",
 		  success : function(data) {
 			 project = data; 
+       if(!project.classes) project.classes = [];
 			 for(var i in project.classes) {
 				 project.classes[i].methods = [];
 			 }
+       if(!project.interfaces) project.interfaces = [];
 			 for(var i in project.interfaces) {
 				 project.interfaces[i].methods = [];
 			 }
 			 loadProjectDetail();
 			 for(var i in tmp_methods) {
-				 processAction({ action : "add", type :"method",tmp_methods[i] });
+				 processAction({ action : "add", type :"method", info: tmp_methods[i] });
 			 }
 			 console.log(project);
 			 socket.emit('openProject',{ project_id: project.id });
