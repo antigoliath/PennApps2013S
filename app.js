@@ -37,7 +37,6 @@ var settings =
   };
 
 
-mongoose.connect(process.env.MONGOLAB_URI );
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -48,16 +47,12 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
-  app.use(express.session({
-    secret: settings.cookie_secret,
-    store: new MongoStore({
-      db: settings.db
-    })
-  }));
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
 });
+
+mongoose.connect(process.env.MONGOLAB_URI );
 
 app.get('/', routes.index);
 app.get('/test', test.test);
