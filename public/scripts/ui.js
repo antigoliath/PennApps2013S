@@ -31,6 +31,7 @@ function resetAddClass() {
 	$("#create-class").click(function() {
 		the_class.name = $("#class-name-textbox").val();
 		the_class.description = $("#class-description-texbox").val();
+		the_class.project = $("#current-project-id").text();
 		var data = {
 			action : "add",
 			type : $("#class-type").val(),
@@ -227,6 +228,41 @@ function classListeners() {
 			}
 		});
 		
+	});
+	
+	$(".info .add-parent").unbind("keydown");
+	$(".info .add-parent").keydown(function(event) {
+		if(event.keyCode == 13) {
+				var modified_class = getInterClass($("#current-object-id").text(),"class");
+				modified_class.parents.push($(this).val());
+				var data = {
+					action : "modify",
+					type : "class",
+					info : modified_class,
+					project_id : $("#current-project-id").text()
+				}
+				console.log(data);
+				saveAction(data);
+				$(this).val("");
+		}
+	});
+	
+	
+	$(".info .add-interface").unbind("keydown");
+	$(".info .add-interface").keydown(function(event) {
+		if(event.keyCode == 13) {
+				var modified_class = getInterClass($("#current-object-id").text(),"class");
+				modified_class.interfaces.push($(this).val());
+				var data = {
+					action : "modify",
+					type : "class",
+					info : modified_class,
+					project_id : $("#current-project-id").text()
+				}
+				console.log(data);
+				saveAction(data);
+				$(this).val("");
+		}
 	});
 }
 
