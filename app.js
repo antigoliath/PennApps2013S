@@ -54,12 +54,8 @@ app.configure(function(){
   }));
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
-
-});
-
-app.configure('development', function(){
   app.use(express.errorHandler());
-  mongoose.connect('mongodb://heroku:30743994b81074e715477f301c02f573@penny.mongohq.com:10053/app11141866');
+  mongoose.connect(ENV['MONGOHQ_URL']);
 });
 
 app.get('/', routes.index);
