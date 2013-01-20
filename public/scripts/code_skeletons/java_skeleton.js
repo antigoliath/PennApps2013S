@@ -159,10 +159,10 @@ function check_warnings(name, warn)
 {
 	var types = ["int", "double", "float", "boolean", "char", "String",
 		"long", "short", "void"]
-	/*for(var c in project.classes)
+	for(var c in project.classes)
 	{
 		types.push(project.classes[c].name)
-	}*/
+	}
 
 	var attr_type = name.toLowerCase()
 
