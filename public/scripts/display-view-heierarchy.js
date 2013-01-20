@@ -93,7 +93,6 @@ function update_hierarchy(project)
 
 		_ids.push(_classes[x].id)
 		box.wrapper.click(function(){
-			alert(_ids[boxes.indexOf(this)])
 			loadClassDetail(_ids[boxes.indexOf(this)]);
 		});
 
@@ -104,11 +103,14 @@ function update_hierarchy(project)
 		var tuple = extensions[conn]
 		boxes[tuple[0]].joint(boxes[tuple[1]], {
 			label: "extends",
+			labelAttrs: {
+				position: 0
+			},
 			color: "white",
 			beSmooth: "true",
 			startArrow: {
 				type: "none",
-				size: 7,
+				size: 0,
 				attrs: {
 					fill: "green",
 					stroke: "white"
@@ -116,7 +118,7 @@ function update_hierarchy(project)
 			},
 			endArrow: {
 				type: "basic",
-				size: 7,
+				size: 10,
 				attrs: {
 					fill: "green",
 					stroke: "white",
@@ -129,10 +131,13 @@ function update_hierarchy(project)
 		var tuple = implementations[conn]
 		boxes[tuple[0]].joint(boxes[tuple[1]], {
 			label: "implements",
+			labelAttrs: {
+				position: 0
+			},
 			beSmooth: "true",
 			startArrow: {
 				type: "none",
-				size: 7,
+				size: 0,
 				attrs: {
 					fill: "white",
 					stroke: "black"
@@ -140,7 +145,7 @@ function update_hierarchy(project)
 			},
 			endArrow: {
 				type: "basic",
-				size: 7,
+				size: 10,
 				attrs: {
 					fill: "white",
 					stroke: "black"
