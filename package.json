@@ -11,6 +11,7 @@
     "underscore": "*",
     "socket.io": "*",
     "mongoose": "*",
-    "connect-mongo": "*" 
+    "connect-mongo": "*", 
+    "highlight.js" : "*"
   }
 }
