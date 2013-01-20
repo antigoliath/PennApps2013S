@@ -1,6 +1,5 @@
 function java_skeleton(_class, _interfaces, flag)
 {
-	alert(_class.id)
 	var class_string = ""
 	var _warnings = []
 
@@ -12,12 +11,11 @@ function java_skeleton(_class, _interfaces, flag)
 
 	//get methods
 	var methods = _class.methods
-	console.log(methods)
 
 	//get parent info if exists
 	var parent = _class.parents
 	var parname = ""
-	if (parent)
+	if (parent[0])
 	{
 		var parname = " extends " + parent.join(", ")
 	}

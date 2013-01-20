@@ -15,6 +15,7 @@
     <script src="/scripts/display-view-heierarchy.js"></script>
     <script src="/scripts/code_skeletons/java_skeleton.js"></script>
     <script src="/scripts/code_skeletons/ruby_skeleton.js"></script>
+    <script src="/scripts/jointjs.min.js"></script>
     <script src="/scripts/code_skeletons/python_skeleton.js"></script>
     <script src="/scripts/display-view-code.js"></script>
     <script src="/scripts/highlight.pack.js"></script>
@@ -60,7 +61,6 @@
 		  });
 		  detailListeners();
 		  $(".edit-object").hide();
-
       /* chat */
 
 
@@ -92,6 +92,9 @@
         }
       });
 
+		  $(".back").click(function(){
+		  	loadProjectDetail();
+		  })
 	  });
 	  </script>
     <div id="project-IDGOESHERE" class="project">
@@ -198,19 +201,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="visualizer-panel" id="canvas">
-			<div class="code-view">
-				<div class="the-code"></div>
-				<div class="warnings-panel"></div>
-				<select id="language" onchange='changeLanguage()'>
-					<option value="java">Java</option>
-					<option value="ruby">Ruby</option>
-					<option value="python">Python</option>
-				</select>
-					Warnings:
-			</div>
-			</div>
-			<div class="hierarchical-view"></div>
+		<div class="visualizer-panel">
+			<div class="the-code" id="canvas"></div>
+			<div class="warnings-panel"></div>
+			<select id="language" onchange='changeLanguage()'>
+				<option value="java">Java</option>
+				<option value="ruby">Ruby</option>
+				<option value="python">Python</option>
+			</select>
 		</div>
     </div>
   </body>

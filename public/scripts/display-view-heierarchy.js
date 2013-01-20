@@ -1,6 +1,6 @@
 function update_hierarchy(project)
 {
-	Joint.resetPaper()
+	$('#canvas').html("")
 	var _classes = (project.classes).concat(project.interfaces)
 	var boxes = []
 
@@ -74,7 +74,12 @@ function update_hierarchy(project)
 			_fill = "blue"
 		}
 
-		var x_dist = Math.random()*(world_paper.width-200)+50
+		var x_width = 140
+		if(world_paper.width/(_classes.length) < 140)
+		{
+			x_width = world_paper.width/(_classes.length)
+		}
+		var x_dist = (world_paper.width/(_classes.length))*x
 		var looper = true
 		while(looper)
 		{
@@ -90,7 +95,7 @@ function update_hierarchy(project)
 		}
 
 		var box = org.Member.create({
-			rect: {x: x_dist, y: (world_paper.height/4)*depth, width: 140, height: 60},
+			rect: {x: x_dist, y: (world_paper.height/4)*depth, width: x_width, height: 60},
 			name: _classes[x].name,
 			position: detail_string,
 			attrs: {fill : _fill, stroke:'gray'}
@@ -101,6 +106,7 @@ function update_hierarchy(project)
 
 		_ids.push(_classes[x].id)
 		box.wrapper.click(function(){
+			alert(_ids[boxes.indexOf(this)])
 			loadClassDetail(_ids[boxes.indexOf(this)]);
 		});
 
