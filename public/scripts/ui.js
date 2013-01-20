@@ -1,3 +1,28 @@
+function detailListeners() {
+	$(".add-controls .add-class").click(function() {
+			$("#add-class").show();
+			$("#add-method").hide();
+			$("#add-attribute").hide();
+	});
+	$(".add-controls .add-attributes").click(function() {
+		if(!$(this).hasClass("disabled")) {
+			$("#add-attribute").show();
+			$("#add-class").hide();
+			$("#add-method").hide();
+		}
+	});
+	$(".add-controls .add-methods").click(function() {
+		if(!$(this).hasClass("disabled")) {
+			$("#add-attribute").hide();
+			$("#add-class").hide();
+			$("#add-method").show();
+		}
+	});
+	resetAddClass();
+	resetAddAttribute();
+	resetAddMethod();
+}
+
 function resetAddClass() {
 	var the_class = {name : "", description : ""}
 	$("#class-name-textbox").val("");
@@ -11,6 +36,8 @@ function resetAddClass() {
 			project_id : $("#current-project-id").text()
 		};
 		saveAction(data);
+		resetAddClass();
+		$("#add-class").hide();
 	});
 }
 

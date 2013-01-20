@@ -21,6 +21,7 @@
   <body>
 	  <script type='text/javascript'>
 	  $(document).ready(function() {
+		  detailListeners();
 		  loadInterfaceDetail(1);
 		  loadClassDetail(1);
 	  });
@@ -42,7 +43,6 @@
 			</div>
 			<div class="add-object">
 				<div id="add-class">
-					<div class="class-prompt">Enter a class name to get started.</div>
 					<div class="class-form">
 						<input id="class-name-textbox" type="text" placeholder="MyClass"/>
 						<select id="class-type">
@@ -74,6 +74,14 @@
 				<div class="info">
 					<div class="name">Name</div>
 					<div class="description">Put a description here...</div>
+				</div>
+				<div class="relations">
+					<div class="parents">
+						<div class="parent">MyParent</div>
+					</div>
+					<div class="interfaces">
+						<div class="interface">My Interface</div>
+					</div>
 				</div>
 				<div class="attributes">
 					<h3>Attributes</h3>

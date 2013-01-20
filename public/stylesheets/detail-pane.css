@@ -14,6 +14,7 @@
 
 .edit-object {
 	margin-top : 20px;
+	position: relative;
 }
 
 /*
@@ -135,6 +136,31 @@
 	padding: 5px 2%;
 }
 
+#add-class, #add-attribute, #add-method {
+	display: none;
+}
+
+#add-class input {
+	width: 66%;
+}
+
+#add-class select {
+	float: right;
+	width: 28%;
+	font-size: 120%;
+	height: 38px;
+}
+
+#create-class {
+	width: 100%;
+	text-align: center;
+	font-size: 120%;
+	font-weight: bold;
+	padding: 5px 0px;
+	background: #efefef;
+	cursor: pointer;
+}
+
 /*
  * Info styling
  * 
@@ -143,6 +169,23 @@
 	font-size: 150%;
 }
 
+/*
+ * 
+ * Relations styling
+ */
+.relations {
+	position: absolute;
+	right: -50px;
+	
+}
+
+.relations > div > div {
+	padding: 5px 10px;
+}
+
+.relations .parent {
+	background: #171;
+}
 
 /*
  * Attribute styling
