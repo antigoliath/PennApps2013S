@@ -267,16 +267,16 @@
 
 #chatbox {
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 800px;
+  width: 600px;
   max-height: 200px; }
 
 #messages {
   color: white; 
   max-height: 160px;
-  overflow:scroll;
+  overflow-y:scroll;
 }
   #messages p {
     margin: 5px 0 5px 0;

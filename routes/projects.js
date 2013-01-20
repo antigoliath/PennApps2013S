@@ -473,6 +473,7 @@ function change_helper(type, obj, change_type){
 
 
   if(change_type === 'modify') {
+    delete info._id;
     model.findByIdAndUpdate(info.id, info, {}, function(err){
           if(err) {
             console.log('ERROR: modifying ' + type + ' failed');
