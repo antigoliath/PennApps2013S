@@ -59,7 +59,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-  mongoose.connect('mongodb://localhost/pennapps2013');
+  mongoose.connect(ENV['MONGOHQ_URL']);
 });
 
 app.get('/', routes.index);
