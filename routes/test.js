@@ -59,7 +59,6 @@ var json = {
 	}
 	]
 };
-var javascripts = require('../code_skeletons/java_skeleton.js')
 exports.test = function(req, res){
 	res.render('test_html', { title: 'Test Page',
 		something: hljs.highlightAuto(javascripts.java_skeleton(json)).value });

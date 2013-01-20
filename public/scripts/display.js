@@ -22,6 +22,8 @@ function modifyClass(info_obj) {
 			loadObjInfoDetail(the_obj);
 		}
 		//Update the code view if necessary
+		update_codeview(the_obj, project.interfaces)
+		
 		//Update the heierachical view if necessary
 	}
 }
@@ -86,6 +88,7 @@ function addMethod(info_obj) {
 			loadMethodsDetail(the_obj);
 		}
 	}
+	update_codeview(the_obj, project.interfaces);
 }
 function modifyMethod(info_obj) {
 	var the_obj = null;

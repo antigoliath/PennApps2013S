@@ -1,18 +1,16 @@
-exports.java_skeleton = function(json)
+function java_skeleton(_class, _interfaces)
 {
-	var body = json
 	var class_string = ""
 	var _warnings = []
 
 	//get class info
-	var _class =  body.class
 	var id = _class.id
 	var name = _class.name
 	var description = _class.description
 	var attributes = _class.attributes
 
 	//get methods
-	var methods = body.methods
+	var methods = _class.methods
 	console.log(methods)
 
 	//get parent info if exists
@@ -24,30 +22,32 @@ exports.java_skeleton = function(json)
 	}
 
 	//get interfaces info if exists
-	var interfaces = body.interfaces
-	var int_names = []
-	var intmethods = []
-	var intstring = ""
-	if(interfaces[0])
+	var interfaces = _class.interfaces
+
+	for(var inter in interfaces)
 	{
-		for(var i in interfaces)
+		for(var _inter in _interfaces)
 		{
-			int_names.push(interfaces[i].name)
-			if(interfaces[i].methods[0])
+			if(interfaces[inter] == _interfaces[_inter].name)
 			{
-				for(var j in interfaces[i].methods)
+				for(var meth_y in _interfaces[_inter].methods)
 				{
-					methods.push(interfaces[i].methods[j])
+					methods.push(_interfaces[_inter].methods[meth_y])
 				}
 			}
 		}
-		intstring = " implements " + int_names.join(", ")
+	}
+
+	var intstring = ""
+	if(interfaces[0])
+	{
+		intstring = " implements " + interfaces.join(", ")
 	}
 
 	//build the string
 	class_string = class_string + "/* " + description + " */\n" + "public class "
 	class_string = class_string + name + parname + intstring + " {\n"
-	if(attributes){
+	if(attributes[0]){
 		for(var xy in attributes)
 		{
 			class_string = class_string + "\t" + attr_string(attributes[xy], _warnings)
@@ -56,7 +56,7 @@ exports.java_skeleton = function(json)
 	//init constructor here
 	class_string = class_string + "\n"+ java_constructor(_class)
 
-	if(methods){
+	if(methods[0]){
 		for(var xy in methods)
 		{
 			class_string = class_string + "\t" + javadoc(methods[xy])
@@ -69,8 +69,8 @@ exports.java_skeleton = function(json)
 
 function attr_string(attr, warn)
 {
-	var attr_type = check_warnings(attr.type, warn)
-	return attr.scope + " " + attr_type + " " + attr.name + ";\n"
+	var attr_name = check_warnings(attr.type, warn)
+	return attr.scope + " " + attr_name + " " + attr.name + ";\n"
 }
 
 function method_string(method, warn)
@@ -122,33 +122,38 @@ function java_constructor(_class)
 function check_warnings(name, warn)
 {
 	var types = ["int", "double", "float", "boolean", "char", "String",
-		"long", "short"]
-	for(var c in project.classes)
+		"long", "short", "void"]
+	/*for(var c in project.classes)
 	{
 		types.push(project.classes[c].name)
-	}
+	}*/
 
-	var attr_type = name.downcase
+	var attr_type = name.toLowerCase()
 
-	if(attr_type.search("count") != 1 || attr_type.search("num") != 1 || attr_type.search("int") != -1)
+	alert(attr_type)
+
+	if (attr_type)
 	{
-		attr_type = "int"
-	}
-	else if(attr_type.search("word") != -1 || attr_type.search("sentence") != -1 || attr_type.search("string") != -1)
-	{
-		attr_type = "String"
-	}
-	else if(attr_type.search("deci") != -1 || attr_type.search("double") != -1)
-	{
-		attr_type = "double"
-	}
-	else if(attr_type.search("bool") != -1 || attr_type.search("true") != -1 || attr_type.search("false") != 1)
-	{
-		attr_type = "boolean"
-	}
-	if(types.indexOf(attr_type) == -1)
-	{
-		warn.push("Unknown type " + attr_type + " could cause an error.")
+		if(attr_type.search("count") != -1 || attr_type.search("num") != -1 || attr_type.search("int") != -1)
+		{
+			attr_type = "int"
+		}
+		else if(attr_type.search("word") != -1 || attr_type.search("sentence") != -1 || attr_type.search("string") != -1)
+		{
+			attr_type = "String"
+		}
+		else if(attr_type.search("deci") != -1 || attr_type.search("double") != -1)
+		{
+			attr_type = "double"
+		}
+		else if(attr_type.search("bool") != -1 || attr_type.search("true") != -1 || attr_type.search("false") != -1)
+		{
+			attr_type = "boolean"
+		}
+		if(types.indexOf(attr_type) == -1)
+		{
+			warn.push("Unknown type " + attr_type + " could cause an error.")
+		}
 	}
 	return attr_type
 }

@@ -1,7 +1,8 @@
-exports.python_skeleton = function(json)
+function python_skeleton(json)
 {
 	var body = JSON.parse(json)
 	var class_string = ""
+	var _warnings = []
 
 	//get class info
 	var _class =  body.class
@@ -64,7 +65,7 @@ exports.python_skeleton = function(json)
 		}
 	}
 
-	return class_string
+	return {class: class_string, warnings: _warnings}
 }
 
 function python_attr_string(attr)
