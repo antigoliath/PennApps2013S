@@ -1,5 +1,21 @@
+function resetAddClass() {
+	var the_class = {name : "", description : ""}
+	$("#class-name-textbox").val("");
+	$("#class-description-textbox").val("Description of MyClass");
+	$("#create-class").unbind("click");
+	$("#create-class").click(function() {
+		var data = {
+			action : "add",
+			type : $("#class-type").val(),
+			info : the_class,
+			project_id : $("#current-project-id").text()
+		};
+		saveAction(data);
+	});
+}
+
 function resetAddAttribute() {
-	var the_attribute = {name : "", attr_type : "", description : ""};
+	var the_attribute = {name : "", attr_type : "", description : "", scope : "private"};
 	$('.attribute-prompt').html("Enter an attribute name <span>Press enter to continue</span>");
 	$('.attribute-preview').html("");
 	$("#add-attribute .form-state").text("0");
@@ -13,14 +29,14 @@ function resetAddAttribute() {
 			case "0":
 				$('.attribute-prompt').html("Enter the attribute's type <span>Press enter to continue, esc to cancel</span>");
 				the_attribute.name = $("#attribute-textbox").val();
-				$('.attribute-preview').append(the_attribute.name);
+				$('.attribute-preview').append("<div class='name'>"+the_attribute.name+"</div>");
 				$("#add-attribute .form-state").text("1");
 				$("#attribute-textbox").val("");
 				break;
 			case "1":
 				$('.attribute-prompt').html("Enter the attribute's description <span>Press enter to continue, esc to cancel</span>");
 				the_attribute.attr_type = $("#attribute-textbox").val();
-				$('.attribute-preview').append(the_attribute.attr_type);
+				$('.attribute-preview').append("<div class='type'>"+the_attribute.attr_type+"</div>");
 				$("#add-attribute .form-state").text("2");
 				$("#attribute-textbox").val("");
 				break;
@@ -63,14 +79,14 @@ function resetAddArgument(the_method) {
 			case "0":
 				the_method.find('.argument-prompt').html("Enter the argument's type <span>Press enter to continue, esc to cancel</span>");
 				the_argument.name = the_method.find(".argument-textbox").val();
-				the_method.find('.argument-preview').append(the_argument.name);
+				the_method.find('.argument-preview').append("<div class='name'>"+the_argument.name+"</div>");
 				the_method.find(".add-argument .form-state").text("1");
 				the_method.find(".argument-textbox").val("");
 				break;
 			case "1":
 				the_method.find('.argument-prompt').html("Enter the argument's description <span>Press enter to continue, esc to cancel</span>");
 				the_argument.attr_type = the_method.find(".argument-textbox").val();
-				the_method.find('.argument-preview').append(the_argument.attr_type);
+				the_method.find('.argument-preview').append("<div class='type'>"+the_argument.attr_type+"</div>");
 				the_method.find(".add-argument .form-state").text("2");
 				the_method.find(".argument-textbox").val("");
 				break;
@@ -115,14 +131,14 @@ function resetAddMethod() {
 			case "0":
 				$('.method-prompt').html("Enter the method's return type <span>Press enter to continue, esc to cancel</span>");
 				the_method.name = $("#method-textbox").val();
-				$('.method-preview').append(the_method.name);
+				$('.method-preview').append("<div class='name'>"+the_method.name+"</div>");
 				$("#add-method .form-state").text("1");
 				$("#method-textbox").val("");
 				break;
 			case "1":
 				$('.method-prompt').html("Enter the method's description <span>Press enter to continue, esc to cancel</span>");
 				the_method.ret = $("#method-textbox").val();
-				$('.method-preview').append(the_method.ret);
+				$('.method-preview').append("<div class='type'>"+the_method.ret+"</div>");
 				$("#add-method .form-state").text("2");
 				$("#method-textbox").val("");
 				break;
