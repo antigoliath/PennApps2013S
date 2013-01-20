@@ -230,6 +230,37 @@ function classListeners() {
 		
 	});
 	
+	$(".info .parent").unbind("click");
+	$(".info .parent").click(function() {
+		
+				var modified_class = getInterClass($("#current-object-id").text(),"class");
+				modified_class.parents.splice(modified_class.parents.indexOf($(this).text()),1);
+				var data = {
+					action : "modify",
+					type : "class",
+					info : modified_class,
+					project_id : $("#current-project-id").text()
+				}
+				console.log(data);
+				saveAction(data);
+	});
+	
+	
+	$(".info .interface").unbind("click");
+	$(".info .interface").click(function() {
+		
+				var modified_class = getInterClass($("#current-object-id").text(),"class");
+				modified_class.interfaces.splice(modified_class.interfaces.indexOf($(this).text()),1);
+				var data = {
+					action : "modify",
+					type : "class",
+					info : modified_class,
+					project_id : $("#current-project-id").text()
+				}
+				console.log(data);
+				saveAction(data);
+	});
+	
 	$(".info .add-parent").unbind("keydown");
 	$(".info .add-parent").keydown(function(event) {
 		if(event.keyCode == 13) {
