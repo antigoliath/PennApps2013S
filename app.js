@@ -35,7 +35,6 @@ var settings =
     // stringify:,
     cookie_secret: "COOKIE SECRET"
   };
-   
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -55,8 +54,9 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
-  mongoose.connect(process.env.MONGOLAB_URI);
 });
+
+mongoose.connect(process.env.MONGOLAB_URI );
 
 app.get('/', routes.index);
 app.get('/test', test.test);
