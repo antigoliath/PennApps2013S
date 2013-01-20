@@ -1,11 +1,36 @@
 /* DAVID XU */
-
+var io  = require('socket.io');
 var models = require('../models/models.js');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var ObjectId = mongoose.Types.ObjectId;
+var sio;
 
-function show_json(type, res){
+
+exports.start_sockets = function(server){
+  sio = io.listen(server);
+  console.log('Server started!');
+  //Configure the socket.io connection settings. 
+  //See http://socket.io/
+  sio.configure(function (){
+    sio.set('log level', 0);
+    sio.set('authorization', function (handshakeData, callback) {
+      callback(null, true); // error first callback style 
+    });
+  });
+  sio.sockets.on('connection', function (client) {
+    console.log('connected bro');
+    client.on('saveAction', function(data){
+      console.log('inside socket save action');
+      saveActionHelper(data);
+    });
+  });
+};
+
+
+
+
+function show_json(type, res) {
   var model;
   switch(type)
   {
@@ -72,19 +97,24 @@ exports.save = function(req,res) {
   //   project_id : "1244asdf"
   //   needed for emitting
   // }; 
-  
-  switch(req.body.action)
+  saveActionHelper(req.body);
+};
+
+function saveActionHelper(info){
+
+  switch(info.action)
   {
-    case 'add': create_helper(req.body.type, req.body.info);
+    case 'add': create_helper(info.type, info.info);
                 break;
-    case 'modify': change_helper(req.body.type, req.body.info, 'modify');
+    case 'modify': change_helper(info.type, info.info, 'modify');
                    break;
-    case 'delete': change_helper(req.body.type, req.body.info, 'delete');
+    case 'delete': change_helper(info.type, info.info, 'delete');
                    break;
     case 'lock': break; // doesn't do anything atm
     case 'unlock': break;
   }
-};
+}
+
 function create_helper(type, info){
   var new_obj;
   var hex_string = info.project || info.parent;

@@ -12,9 +12,12 @@ var express = require('express')
   , project = require('./routes/project')
   , path = require('path')
   , mongoose = require("mongoose")
-  , MongoStore = require('connect-mongo')(express);
-
-var app = express();
+  , MongoStore = require('connect-mongo')(express)
+  , app = express()
+  , server = http.createServer(app)
+  , socket_start = require('./routes/projects.js').start_sockets
+  ;
+socket_start(server);
 
   
 var settings =
@@ -74,6 +77,6 @@ app.post('/methods/new', projects.create_method);
 app.post('/interfaces/new', projects.create_interface);
 app.post('/save', projects.save);
 
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

@@ -13,7 +13,7 @@ var Class = new mongoose.Schema({
   name: String,
   description: String,
   project: ObjectId,
-  parent: String,
+  parents: [String],
   interfaces: [String],
   attributes: [
     { 

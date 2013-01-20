@@ -1,7 +1,9 @@
-//var socket = io.connect("http://localhost:");
+var socket = io.connect("/");
 
 function saveAction(action_obj) {
-	//socket.emit('saveAction',action_obj);
+  console.log(action_obj);
+	socket.emit('saveAction', {hi:'hi'});
+  console.log('save action done');
 	processAction(action_obj);
 }
 function processAction(action_obj) {
@@ -46,7 +48,7 @@ var example = {
 	type : "method",
 	info : {
 		id : "15adfdsf",
-		name : "asdfasdf",
+		name : "asdfasdf"
 		},
 	project_id : "1244asdf"
-}
+};
