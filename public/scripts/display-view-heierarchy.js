@@ -59,15 +59,15 @@ function update_hierarchy(project)
 
 		if(depth > 0)
 		{
-			_fill = "yellow"
+			_fill = "blue"
 		}
 		if(depth > 1)
 		{
-			_fill = "green"
+			_fill = "red"
 		}
 		if(depth > 2)
 		{
-			_fill = "blue"
+			_fill = "green"
 		}
 		if(depth > 3)
 		{
