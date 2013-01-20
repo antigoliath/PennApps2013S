@@ -1,3 +1,14 @@
+@font-face {
+  font-family: col;
+  src: url('../Fonts/ColabThi.otf');
+}
+
+body, textarea, input, button, select{
+  font-family: col;
+  color: #dde3e4
+  
+}
+
 html {
 	height: 100%;
 }
