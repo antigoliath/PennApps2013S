@@ -339,3 +339,12 @@ select {
   max-height: 200px;
 }
 
+#chat-username {
+  position:absolute;
+  top:0px;
+  right:0px;
+
+}
+::-webkit-input-placeholder { color:black; }
+::-moz-placeholder { color:black; } /* firefox 19+ */
+input:-moz-placeholder { color:black; }
