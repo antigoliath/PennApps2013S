@@ -174,13 +174,15 @@
  * Relations styling
  */
 .relations {
-	position: absolute;
-	right: -50px;
-	
+	margin-top: 10px;
 }
-
-.relations > div > div {
-	padding: 5px 10px;
+ 
+.relations div {
+	display: inline;
+	padding: 5px;
+	font-size: 90%;
+	border-radius: 4px;
+	
 }
 
 .relations .parent {

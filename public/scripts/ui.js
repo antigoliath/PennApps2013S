@@ -29,6 +29,8 @@ function resetAddClass() {
 	$("#class-description-textbox").val("Description of MyClass");
 	$("#create-class").unbind("click");
 	$("#create-class").click(function() {
+		the_class.name = $("#class-name-textbox").val();
+		the_class.description = $("#class-description-texbox").val();
 		var data = {
 			action : "add",
 			type : $("#class-type").val(),
