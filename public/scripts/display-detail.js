@@ -7,6 +7,7 @@ function loadClassDetail(class_id) {
 			loadObjectDetail(the_class);
 		}
 	}
+	update_codeview(the_class, project.interfaces, "class", "java")
 }
 function loadInterfaceDetail(interface_id) {
 	for(var i in project.interfaces) {

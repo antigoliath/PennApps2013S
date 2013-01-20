@@ -14,7 +14,7 @@ function java_skeleton(_class, _interfaces, flag)
 	console.log(methods)
 
 	//get parent info if exists
-	var parent = _class.parent
+	var parent = _class.parents
 	var parname = ""
 	if (parent)
 	{
@@ -26,18 +26,13 @@ function java_skeleton(_class, _interfaces, flag)
 
 	for(var inter in interfaces)
 	{
-		if(parent.indexOf(interfaces[inter]) == -1)
+		for(var _inter in _interfaces)
 		{
-			parent.push(interfaces[inter])
-
-			for(var _inter in _interfaces)
+			if(interfaces[inter] == _interfaces[_inter].name)
 			{
-				if(interfaces[inter] == _interfaces[_inter].name)
+				for(var meth_y in _interfaces[_inter].methods)
 				{
-					for(var meth_y in _interfaces[_inter].methods)
-					{
-						methods.push(_interfaces[_inter].methods[meth_y])
-					}
+					methods.push(_interfaces[_inter].methods[meth_y])
 				}
 			}
 		}
@@ -137,8 +132,22 @@ function java_constructor(_class)
 				_class.attributes[a].name+";")
 		}
 	}
+	var longattrstring = attr.join(", ")
+	var counter = 0
+	for(var chars in longattrstring)
+	{
+		if(longattrstring[chars] == ",")
+		{
+			counter += 1
+		}
+		if(counter % 4 == 0 && counter > 0)
+		{
+			longattrstring = longattrstring.insert(chars, "\n\t")
+			counter = 0
+		}
+	}
 
-	return "\tpublic " + _class.name +"("+attr.join(", ")+
+	return "\tpublic " + _class.name +"("+longattrstring+
 		"){\n\t\t"+initstring.join("\n\t\t")+"\n"+"\t}\n"
 }
 
@@ -171,10 +180,18 @@ function check_warnings(name, warn)
 		{
 			attr_type = "boolean"
 		}
-		if(types.indexOf(attr_type) == -1)
+		else if(types.indexOf(attr_type) == -1)
 		{
 			warn.push("Unknown type " + attr_type + " could cause an error.")
+			attr_type = name
 		}
 	}
 	return attr_type
 }
+
+String.prototype.insert = function (index, string) {
+  if (index > 0)
+    return this.substring(0, index) + string + this.substring(index, this.length);
+  else
+    return string + this;
+};

@@ -27,7 +27,7 @@
 	  });
 	  </script>
     <div id="project-IDGOESHERE" class="project">
-		<div class="detail-panel">
+		<div class="detail-panel span3 navbar-inner">
 			<div class="project-info">
 				<div class="back">Back</div>
 			</div>
@@ -36,6 +36,14 @@
 				<div class="add-attributes">Add Attributes</div>
 				<div class="add-methods">Add Methods</div>
 			</div>
+			<form>
+				<label>Select a language:</label>
+				<select id="language" onchange='changeLanguage()'>
+					<option value="java">Java</option>
+					<option value="ruby">Ruby</option>
+					<option value="python">Python</option>
+				</select>
+			</form>
 			<div id="detail-hidden-info">
 				<div id="current-project-id"></div>
 				<div id="current-object-id">1</div>
@@ -126,16 +134,13 @@
 					</div>
 					<! -- End Method -- !>
 				</div>
-				
-				
-			
 			</div>
 		</div>
 		<div class="visualizer-panel">
 			<div class="code-view">
-				<span class="the-code" style="width:80%"></div>
-				<span class="warnings-panel" style="float:right"></span>
+				<div class="the-code"></div>
 			</div>
+			<div class="warnings-panel">Warnings:</div>
 			<div class="hierarchical-view"></div>
 		</div>
     </div>

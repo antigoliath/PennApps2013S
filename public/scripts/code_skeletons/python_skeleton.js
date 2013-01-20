@@ -13,7 +13,7 @@ function python_skeleton(_class, _interfaces)
 	var methods = _class.methods
 
 	//get parent info if exists
-	var parent = _class.parent
+	var parent = _class.parents
 	var parname = ""
 	if (parent)
 	{

@@ -22,7 +22,7 @@ function modifyClass(info_obj) {
 			loadObjInfoDetail(the_obj);
 		}
 		//Update the code view if necessary
-		update_codeview(the_obj, project.interfaces, "class", "java")
+		update_codeview(the_obj, project.interfaces, "class")
 		
 		//Update the heierachical view if necessary
 	}
@@ -73,7 +73,7 @@ function addMethod(info_obj) {
 				the_obj = the_class;
 			}
 		}
-		update_codeview(the_obj, project.interfaces, "class", "java");
+		update_codeview(the_obj, project.interfaces, "class");
 	}
 	else {
 		for(var i in project.interfaces) {
@@ -83,7 +83,7 @@ function addMethod(info_obj) {
 				the_obj = the_interface;
 			}
 		}
-		update_codeview(the_obj, project.interfaces, "interface", "java");
+		update_codeview(the_obj, project.interfaces, "interface");
 	}
 	if(the_obj) {
 		if($("#current-object-id").text() == the_obj.id) {

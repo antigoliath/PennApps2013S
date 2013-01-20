@@ -14,7 +14,7 @@ function ruby_skeleton(_class, _interfaces)
 	console.log(methods)
 
 	//get parent info if exists
-	var parent = _class.parent
+	var parent = _class.parents
 	var parname = ""
 	if (parent)
 	{
